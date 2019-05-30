@@ -1,0 +1,11 @@
+{
+  "app_url": "https://9.70.181.78:8000",
+  "sso_config": {
+    "authorization_url": "https://idaas.iam.ibm.com/idaas/oidc/endpoint/default/authorize",
+    "token_url": "https://idaas.iam.ibm.com/idaas/oidc/endpoint/default/token",
+    "issuer_id": "https://idaas.iam.ibm.com",
+    "logout_url": "https://idaas.iam.ibm.com/pkmslogout",
+    "client_id": "ZWFjN2UwZWYtNDYzOC00",
+    "client_secret": "OTJkMmNkNmUtZGNhZS00"
+  }
+}
