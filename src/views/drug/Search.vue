@@ -64,7 +64,8 @@ export default Vue.extend({
 <style scoped>
 .el-tag + .el-tag {
   margin-left: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .button-new-tag {
   margin-left: 10px;

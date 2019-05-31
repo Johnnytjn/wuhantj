@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <el-header>
+    <el-header style="height:10%;">
       <div class="header">
         <span class="title">武汉技侦XX系统</span>
       </div>
     </el-header>
-    <el-container style="flex-grow:2; border: 1px solid #eee">
+    <el-container style="flex-grow:2; border: 1px solid #eee;height:90%;">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <el-menu default-active="/drug" class="el-menu-vertical-demo" router>
           <el-menu-item index="/drug">
@@ -22,8 +22,8 @@
           </el-menu-item>
         </el-menu>
       </el-aside>
-      <el-container>
-        <el-main>
+      <el-container style="height:100%;">
+        <el-main style="height:100%;">
           <router-view/>
         </el-main>
       </el-container>

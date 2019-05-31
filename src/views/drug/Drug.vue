@@ -35,6 +35,9 @@ export default Vue.extend({
   min-height: 100px;
   border-bottom: 1px solid rgb(238, 241, 246);
   padding: 5px 0 0 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .drug-content {
