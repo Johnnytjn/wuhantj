@@ -50,7 +50,7 @@ export default {
 }
 
 body {
-  margin: unset;
+  margin: 0px;
   height: 100%;
 }
 
@@ -59,7 +59,7 @@ body {
 }
 
 .el-header {
-  padding: unset !important;
+  padding: 0px !important;
 }
 
 .title {
@@ -83,6 +83,6 @@ html {
 }
 
 .el-main {
-  padding: unset !important;
+  padding: 0px !important;
 }
 </style>
