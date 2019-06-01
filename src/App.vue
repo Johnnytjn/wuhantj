@@ -32,6 +32,15 @@
 </template>
 
 <script>
+import Vue from "vue";
+import DataField from "./components/DataField.vue";
+import DataTable from "./components/DataTable.vue";
+import VDataTable from "./components/VerticalDataTable.vue";
+
+Vue.component("data-field", DataField);
+Vue.component("data-table", DataTable);
+Vue.component("v-data-table", VDataTable);
+
 export default {
   name: "app"
 };

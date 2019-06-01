@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top:20px;">
-    <label>{{label}}:</label>
+    <label style="font-weight:900">{{label}}:</label>
     &nbsp;
     <span>{{value}}</span>
   </div>

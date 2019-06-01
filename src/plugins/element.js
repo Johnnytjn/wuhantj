@@ -10,7 +10,9 @@ import {
   TabPane,
   Tabs,
   Tag,
-  Input
+  Input,
+  Table,
+  TableColumn
 } from 'element-ui';
 
 Vue.use(Button);
@@ -24,3 +26,5 @@ Vue.use(Tabs);
 Vue.use(TabPane);
 Vue.use(Tag);
 Vue.use(Input);
+Vue.use(Table);
+Vue.use(TableColumn);
