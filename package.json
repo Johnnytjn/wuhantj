@@ -16,6 +16,7 @@
     "@babel/polyfill": "^7.4.4",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "echarts": "4.2.1",
     "element-ui": "^2.4.5",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",

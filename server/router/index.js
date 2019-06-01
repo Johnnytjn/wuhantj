@@ -1,12 +1,16 @@
-const BackendAPI = require('../api/backend');
+const DrugRelatedPersAPI = require('../api/drugRelatedPersAPI');
 
-const backendAPI = ctx => {
-  return new BackendAPI(envConfig);
+const drugRelatedPersAPI = ctx => {
+  return new DrugRelatedPersAPI({ baseUrl: process.env.API_BASE_URL });
 };
 
 module.exports = function(router) {
   router.prefix('/api');
-  router.get('/currentUser', ctx => {
+  router.post('/drug-related-pers/graph', async ctx => {
+    const { phoneNumbers } = ctx.request.body;
+    ctx.body = await drugRelatedPersAPI(ctx).getRelatedPerGraph(phoneNumbers);
+  });
+  router.get('/drug-related-pers/:phoneNumber', async ctx => {
     ctx.body = ctx.state.user.id;
   });
 };
