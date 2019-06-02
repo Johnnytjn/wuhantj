@@ -22,12 +22,15 @@ export default Vue.extend({
       const graph = newData.graph;
       const categoryCount = graph["categoryCount"];
       const nodeData = graph.nodes.map(n => {
+        const isTargetNode = n.type === "target";
         const item = {
           itemStyle: {
-            opacity: n.type === "target" ? 1 : +n.score * 0.01
+            opacity: isTargetNode ? 1 : +n.score * 0.01
           },
-          symbolSize: n.type === "target" ? 30 : 15,
-          draggable: true
+          symbolSize: isTargetNode ? [100, 60] : 80,
+          symbol: isTargetNode ? "rect" : "circle",
+          draggable: true,
+          value: n["score"]
         };
         return Object.assign(n, item);
       });
@@ -45,43 +48,48 @@ export default Vue.extend({
       }
 
       const optionData = {
+        animation: false,
+        // tooltip: {
+        //   formatter: params => {
+        //     const { type, score, name } = params.data;
+        //     return type === "target" ? name : `${name}\n(${score}%)`;
+        //   }
+        // },
         series: [
           {
+            name: "涉毒关系人",
             type: "graph",
             layout: "force",
             data: nodeData,
             links: linkData,
             categories: categories,
             roam: true,
-            animation: true,
+            focusNodeAdjacency: true,
+            force: {
+              repulsion: 200,
+              edgeLength: 200
+            },
             label: {
               show: true,
-              normal: {
-                position: "right"
+              fontSize: 18,
+              formatter: params => {
+                const { type, score, name } = params.data;
+                return type === "target" ? name : `${name}\n(${score}%)`;
               }
-            },
-            force: {
-              repulsion: 200
             }
-            // legend: [
-            //   {
-            //     // selectedMode: 'single',
-            //     data: categories.map(function(a) {
-            //       return a["name"];
-            //     })
-            //   }
-            // ]
           }
         ]
       };
-      console.log("chart data:", JSON.stringify(optionData));
       this.chart.clear();
       this.chart.setOption(optionData);
     }
   },
   mounted() {
     this.chart = echarts.init(document.getElementById("drugRelatedPerGraph"));
-
+    this.chart.on("click", function(params) {
+      const phoneNumber = params.data.id;
+      console.log("&&&&", phoneNumber);
+    });
     window.onresize = this.chart.resize;
   }
 }) as any;

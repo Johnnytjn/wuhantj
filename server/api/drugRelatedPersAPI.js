@@ -67,9 +67,11 @@ module.exports = class BackendAPI {
       const personData = rawData['person-data'];
       const targetNums = Object.keys(relationships);
       Object.entries(personData).forEach(([phoneNumber, person]) => {
-        const { name: personName, score } = person;
+        const { name: personName, score: rawScore } = person;
+        const score = +(+rawScore.toFixed(2));
         const type = targetNums.includes(phoneNumber) ? 'target' : 'contact';
-        const name = type === 'target' ? personName : `${personName} (${score} %)`;
+        // const name = type === 'target' ? personName : `${personName} (${score} %)`;
+        const name = personName;
         graphData['nodes'].push({ id: phoneNumber, name, score, type });
       });
 
