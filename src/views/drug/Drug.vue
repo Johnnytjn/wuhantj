@@ -1,11 +1,11 @@
 <template>
   <div class="drug-main">
     <div class="drug-search">
-      <search/>
+      <search :onSearch="handleSearch"/>
     </div>
     <div class="drug-content">
       <div class="drug-graph">
-        <graph/>
+        <graph :graphData="graphData"/>
       </div>
       <div class="drug-person">
         <person-info/>
@@ -19,8 +19,30 @@ import Vue from "vue";
 import Search from "./Search.vue";
 import Graph from "./Graph.vue";
 import PersonInfo from "./PersonInfo.vue";
+import apiClient from "../../utils/api-client";
 export default Vue.extend({
-  components: { PersonInfo, Search, Graph }
+  components: { PersonInfo, Search, Graph },
+  data() {
+    return {
+      graphData: null
+    };
+  },
+  methods: {
+    handleSearch(phoneNumbers) {
+      const loading = this.$loading({ fullscreen: true });
+      apiClient
+        .getDrugRelatedPersGraph(phoneNumbers)
+        .then(data => {
+          this.graphData = data;
+        })
+        .catch(error => {
+          this.$error("搜索时系统出错！");
+        })
+        .finally(() => {
+          loading.close();
+        });
+    }
+  } as any
 });
 </script>
 

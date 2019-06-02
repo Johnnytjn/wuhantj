@@ -12,7 +12,8 @@ import {
   Tag,
   Input,
   Table,
-  TableColumn
+  TableColumn,
+  Loading
 } from 'element-ui';
 
 Vue.use(Button);
@@ -28,3 +29,4 @@ Vue.use(Tag);
 Vue.use(Input);
 Vue.use(Table);
 Vue.use(TableColumn);
+Vue.use(Loading);

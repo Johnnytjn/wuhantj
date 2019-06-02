@@ -9,33 +9,64 @@ import Vue from "vue";
 import echarts from "echarts";
 
 export default Vue.extend({
+  props: {
+    graphData: Object
+  },
   data(): any {
     return {
       chart: null
     };
   },
+  watch: {
+    graphData(newData) {
+      const graph = newData.graph;
+      const nodeData = graph.nodes.map(n => {
+        const item = {
+          itemStyle: {
+            opacity: n.type === "target" ? 1 : +n.score * 0.01
+          },
+          symbolSize: n.type === "target" ? 30 : 15,
+          draggable: true
+        };
+        return Object.assign(n, item);
+      });
+
+      const linkData = graph.links.map(x => {
+        x.value = 200;
+        return x;
+      });
+
+      const optionData = {
+        series: [
+          {
+            type: "graph",
+            layout: "force",
+            data: nodeData,
+            links: linkData,
+            // categories: categories,
+            roam: true,
+            animation: true,
+            label: {
+              show: true,
+              normal: {
+                position: "right"
+              }
+            },
+            force: {
+              repulsion: 200
+            }
+          }
+        ]
+      };
+      console.log("chart data:", JSON.stringify(optionData));
+      this.chart.clear();
+      this.chart.setOption(optionData);
+    }
+  },
   mounted() {
     this.chart = echarts.init(document.getElementById("drugRelatedPerGraph"));
-    this.chart.clear();
 
-    const optionData = {
-      xAxis: {
-        type: "category",
-        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-      },
-      yAxis: {
-        type: "value"
-      },
-      series: [
-        {
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
-          type: "line",
-          smooth: true
-        }
-      ]
-    };
-
-    this.chart.setOption(optionData);
+    window.onresize = this.chart.resize;
   }
 }) as any;
 </script>
@@ -49,8 +80,8 @@ export default Vue.extend({
 }
 
 #drugRelatedPerGraph {
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
 }
 </style>
 

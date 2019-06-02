@@ -21,8 +21,8 @@
       <!-- <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button> -->
     </div>
     <div class="button-container">
-      <el-button type="primary">搜索</el-button>
-      <el-button>清空</el-button>
+      <el-button type="primary" @click="submit">搜索</el-button>
+      <el-button @click="reset">清空</el-button>
     </div>
   </div>
 </template>
@@ -30,6 +30,9 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
+  props: {
+    onSearch: Function
+  },
   data() {
     return {
       dynamicTags: ["Tag 1", "Tag 2", "Tag 3"],
@@ -38,6 +41,12 @@ export default Vue.extend({
     };
   },
   methods: {
+    submit() {
+      this.onSearch(this.dynamicTags);
+    },
+    reset() {
+      this.dynamicTags = [];
+    },
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
