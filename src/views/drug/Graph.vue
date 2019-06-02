@@ -27,8 +27,8 @@ export default Vue.extend({
           itemStyle: {
             opacity: isTargetNode ? 1 : +n.score * 0.01
           },
-          symbolSize: isTargetNode ? [100, 60] : 80,
-          symbol: isTargetNode ? "rect" : "circle",
+          symbolSize: isTargetNode ? 150 : 80,
+          symbol: isTargetNode ? "circle" : "circle",
           draggable: true,
           value: n["score"]
         };
@@ -67,7 +67,7 @@ export default Vue.extend({
             focusNodeAdjacency: true,
             force: {
               repulsion: 200,
-              edgeLength: 200
+              edgeLength: 300
             },
             label: {
               show: true,
