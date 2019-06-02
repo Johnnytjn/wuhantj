@@ -41,6 +41,23 @@ Vue.component("data-field", DataField);
 Vue.component("data-table", DataTable);
 Vue.component("v-data-table", VDataTable);
 
+Vue.prototype.$success = function(message) {
+  this.$message({
+    message,
+    type: "success"
+  });
+};
+
+Vue.prototype.$error = function(message) {
+  this.$message({
+    message,
+    type: "error",
+    duration: 0,
+    showClose: true,
+    dangerouslyUseHTMLString: true
+  });
+};
+
 export default {
   name: "app"
 };

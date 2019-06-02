@@ -20,6 +20,7 @@ export default Vue.extend({
   watch: {
     graphData(newData) {
       const graph = newData.graph;
+      const categoryCount = graph["categoryCount"];
       const nodeData = graph.nodes.map(n => {
         const item = {
           itemStyle: {
@@ -36,6 +37,13 @@ export default Vue.extend({
         return x;
       });
 
+      const categories = [{}];
+      for (let i = 0; i < categoryCount; i++) {
+        categories[i] = {
+          name: "类目" + i
+        };
+      }
+
       const optionData = {
         series: [
           {
@@ -43,7 +51,7 @@ export default Vue.extend({
             layout: "force",
             data: nodeData,
             links: linkData,
-            // categories: categories,
+            categories: categories,
             roam: true,
             animation: true,
             label: {
@@ -55,6 +63,14 @@ export default Vue.extend({
             force: {
               repulsion: 200
             }
+            // legend: [
+            //   {
+            //     // selectedMode: 'single',
+            //     data: categories.map(function(a) {
+            //       return a["name"];
+            //     })
+            //   }
+            // ]
           }
         ]
       };
