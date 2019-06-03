@@ -18,7 +18,7 @@ module.exports = class BackendAPI {
     return axios(config).then(res => res.data);
   }
 
-  async getPerData(phoneNumber) {
+  async getPersonData(phoneNumber) {
     let rawData;
     if (this.baseUrl) {
       const url = this.baseUrl + '/drug-related-pers/' + phoneNumber;

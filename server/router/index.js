@@ -11,6 +11,7 @@ module.exports = function(router) {
     ctx.body = await drugRelatedPersAPI(ctx).getRelatedPerGraph(phoneNumbers);
   });
   router.get('/drug-related-pers/:phoneNumber', async ctx => {
-    ctx.body = ctx.state.user.id;
+    const { phoneNumber } = ctx.params;
+    ctx.body = await drugRelatedPersAPI(ctx).getPersonData(phoneNumber);
   });
 };

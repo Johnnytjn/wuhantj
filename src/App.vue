@@ -7,8 +7,8 @@
     </el-header>
     <el-container style="flex-grow:2; border: 1px solid #eee;height:90%;">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu default-active="/drug" class="el-menu-vertical-demo" router>
-          <el-menu-item index="/drug">
+        <el-menu default-active="/drug-related" class="el-menu-vertical-demo" router>
+          <el-menu-item index="/drug-related">
             <i class="el-icon-menu"></i>
             <span>涉毒研判模型</span>
           </el-menu-item>

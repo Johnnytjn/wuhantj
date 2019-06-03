@@ -5,10 +5,10 @@
     </div>
     <div class="drug-content">
       <div class="drug-graph">
-        <graph :graphData="graphData"/>
+        <graph :graphData="graphData" :onPersonSelected="showPersonData"/>
       </div>
       <div class="drug-person">
-        <person-info/>
+        <person-info :personData="personData"/>
       </div>
     </div>
   </div>
@@ -24,16 +24,34 @@ export default Vue.extend({
   components: { PersonInfo, Search, Graph },
   data() {
     return {
-      graphData: null
+      graphData: null,
+      personData: null
     };
   },
   methods: {
+    showPersonData(phoneNumber) {
+      const loading = this.$loading({ fullscreen: true });
+      apiClient
+        .getPersonData(phoneNumber)
+        .then(data => {
+          this.personData = data;
+        })
+        .catch(error => {
+          this.$error("加载个人信息时系统出错！");
+        })
+        .finally(() => {
+          loading.close();
+        });
+    },
     handleSearch(phoneNumbers) {
       const loading = this.$loading({ fullscreen: true });
       apiClient
         .getDrugRelatedPersGraph(phoneNumbers)
         .then(data => {
           this.graphData = data;
+          if (data && data.graph && data.graph.nodes && data.graph.nodes[0]) {
+            this.showPersonData(data.graph.nodes[0].id);
+          }
         })
         .catch(error => {
           this.$error("搜索时系统出错！");

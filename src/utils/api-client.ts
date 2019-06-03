@@ -51,7 +51,7 @@ class APIClient {
     });
   }
 
-  getDrugRelatedPer(phoneNumber: string) {
+  getPersonData(phoneNumber: string) {
     return this.invoke({
       url: BaseURL.drugRelatedPers + '/' + phoneNumber
     });

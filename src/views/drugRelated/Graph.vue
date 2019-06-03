@@ -10,7 +10,8 @@ import echarts from "echarts";
 
 export default Vue.extend({
   props: {
-    graphData: Object
+    graphData: Object,
+    onPersonSelected: Function
   },
   data(): any {
     return {
@@ -85,6 +86,7 @@ export default Vue.extend({
     }
   },
   mounted() {
+    const that = this;
     this.chart = echarts.init(
       document.getElementById("drugRelatedPerGraph"),
       null,
@@ -92,7 +94,7 @@ export default Vue.extend({
     );
     this.chart.on("click", function(params) {
       const phoneNumber = params.data.id;
-      console.log("&&&&", phoneNumber);
+      that.onPersonSelected(phoneNumber);
     });
     window.onresize = this.chart.resize;
   }

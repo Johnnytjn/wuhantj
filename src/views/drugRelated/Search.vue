@@ -35,7 +35,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      dynamicTags: ["Tag 1", "Tag 2", "Tag 3"],
+      dynamicTags: new Array(),
       inputVisible: true,
       inputValue: ""
     };
