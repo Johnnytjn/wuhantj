@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-show="personData">
     <el-tabs type="card">
       <el-tab-pane label="个人信息">
         <tab-personal :personData="personalData"/>
