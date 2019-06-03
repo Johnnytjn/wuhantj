@@ -85,7 +85,11 @@ export default Vue.extend({
     }
   },
   mounted() {
-    this.chart = echarts.init(document.getElementById("drugRelatedPerGraph"));
+    this.chart = echarts.init(
+      document.getElementById("drugRelatedPerGraph"),
+      null,
+      { renderer: "svg" }
+    );
     this.chart.on("click", function(params) {
       const phoneNumber = params.data.id;
       console.log("&&&&", phoneNumber);
@@ -106,6 +110,7 @@ export default Vue.extend({
 #drugRelatedPerGraph {
   width: 100%;
   height: 100%;
+  /* height: 500px; */
 }
 </style>
 

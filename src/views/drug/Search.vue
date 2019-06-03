@@ -18,7 +18,6 @@
         @blur="handleInputConfirm"
         placeholder="请输入目标人员电话并回车"
       ></el-input>
-      <!-- <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button> -->
     </div>
     <div class="button-container">
       <el-button type="primary" @click="submit">搜索</el-button>
@@ -29,6 +28,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+
 export default Vue.extend({
   props: {
     onSearch: Function
@@ -49,13 +49,6 @@ export default Vue.extend({
     },
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-    },
-
-    showInput() {
-      this.inputVisible = true;
-      this.$nextTick(_ => {
-        this.$refs.saveTagInput.$refs.input.focus();
-      });
     },
 
     handleInputConfirm() {

@@ -22,4 +22,12 @@ module.exports = {
       enableInSFC: false
     }
   }
+
+  // configureWebpack: config => {
+  //   // if (isProduction) {
+  //   config.externals = {
+  //     echarts: 'echarts'
+  //   };
+  //   // }
+  // }
 };

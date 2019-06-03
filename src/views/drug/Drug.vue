@@ -65,11 +65,13 @@ export default Vue.extend({
 .drug-content {
   flex-grow: 2;
   display: flex;
+  height: 90%;
 }
 
 .drug-graph {
   flex-grow: 2;
   overflow-y: auto;
+  height: 90%;
 }
 
 .drug-person {
