@@ -1,0 +1,111 @@
+{
+  "personInfo": {
+    "sfzh": "123456789123132",
+    "predict": 98.12,
+    "name": "张三",
+    "photo": "https://thisisaurlforphoto.com.cn",
+    "sex": 0,
+    "age": 30,
+    "bithday": "1995-07-08",
+    "marriage": 0,
+    "culture": 0,
+    "homeAddress": "上海市嘉定区曹安公路4800号同济大学"
+  },
+  "linkInfo": {
+    "hj": 8,
+    "hk": 9,
+    "yckgj": 3,
+    "zjzk": "130xxxxxxxx",
+    "keyword": 10,
+    "bithday": "1995-07-08",
+    "sensitivePlace": ["昆明", "丽江", "玉溪"],
+    "sensitivePhone": [
+      { "phoneNum": "12345678", "place": "昆明" },
+      { "phoneNum": "12345678", "place": "昆明" },
+      { "phoneNum": "12345678", "place": "昆明" }
+    ],
+    "firstAssociate": [
+      { "name": "张三", "sfzh": "123456765432345678" },
+      { "name": "张三", "sfzh": "123456765432345678" },
+      { "name": "张三", "sfzh": "123456765432345678" }
+    ]
+  },
+  "trackInfo": {
+    "hotelTimes": 11,
+    "changeHotelTimes": 22,
+    "checkInMultiHotel": 44,
+    "toPoisonPlace": [
+      { "date": "2019-23-09", "place": "丽江" },
+      { "date": "2019-23-09", "place": "丽江" },
+      { "date": "2019-23-09", "place": "丽江" },
+      { "date": "2019-23-09", "place": "丽江" }
+    ],
+    "zfyc": [
+      {
+        "startTime": "2019-23-09",
+        "endtime": "2019-30-09",
+        "dateNum": 10,
+        "totalLAC": 10
+      },
+      {
+        "startTime": "2019-23-09",
+        "endtime": "2019-30-09",
+        "dateNum": 10,
+        "totalLAC": 10
+      },
+      {
+        "startTime": "2019-23-09",
+        "endtime": "2019-30-09",
+        "dateNum": 10,
+        "totalLAC": 10
+      }
+    ]
+  },
+  "criminalRecord": {
+    "criminalRecord": [
+      {
+        "eventNo": "00001",
+        "eventName": "昆明市011运毒案",
+        "eventType": "运毒"
+      },
+      {
+        "eventNo": "00001",
+        "eventName": "昆明市011运毒案",
+        "eventType": "运毒"
+      },
+      {
+        "eventNo": "00001",
+        "eventName": "昆明市011运毒案",
+        "eventType": "运毒"
+      }
+    ]
+  },
+  "postInfo": {
+    "changeAddress": 4,
+    "noAddress": 5,
+    "unclearAddress": 6,
+    "sensitiveAddress": [
+      { "sensTime": "2019-05-30", "sensAddress": "云南省昆明市xxxxx" }
+    ],
+    "overWeightPackage": [
+      {
+        "time": "2018-09-12",
+        "sendAddress": "上海市嘉定区xxxxxxxxx",
+        "productName": "面粉",
+        "weight": "10kg"
+      },
+      {
+        "time": "2018-09-12",
+        "sendAddress": "上海市嘉定区xxxxxxxxx",
+        "productName": "面粉",
+        "weight": "10kg"
+      },
+      {
+        "time": "2018-09-12",
+        "sendAddress": "上海市嘉定区xxxxxxxxx",
+        "productName": "面粉",
+        "weight": "10kg"
+      }
+    ]
+  }
+}
