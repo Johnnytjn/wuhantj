@@ -9,19 +9,23 @@
         @close="handleClose(tag)"
       >{{tag}}</el-tag>
       <el-input
+        type="text"
+        maxlength="11"
+        minlength="11"
+        clearable
         class="input-new-tag el-tag"
         v-if="inputVisible"
         v-model="inputValue"
         ref="saveTagInput"
         size="mini"
         @keyup.enter.native="handleInputConfirm"
-        @blur="handleInputConfirm"
+        @blur="handleInputBlur"
         placeholder="请输入目标人员电话并回车"
       ></el-input>
     </div>
     <div class="button-container">
-      <el-button type="primary" @click="submit">搜索</el-button>
-      <el-button @click="reset">清空</el-button>
+      <el-button type="primary" @click="submit" :disabled="dynamicTags.length===0">搜索</el-button>
+      <el-button @click="reset" :disabled="dynamicTags.length===0">清空</el-button>
     </div>
   </div>
 </template>
@@ -50,16 +54,20 @@ export default Vue.extend({
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
-
+    handleInputBlur() {
+      this.inputValue = "";
+    },
     handleInputConfirm() {
       let inputValue = this.inputValue;
-      if (inputValue) {
+
+      if (/\d{11}/.test(inputValue)) {
         this.dynamicTags.push(inputValue);
+        this.inputValue = "";
+      } else {
+        this.$error("请输入长度为11位的手机号");
       }
-      // this.inputVisible = false;
-      this.inputValue = "";
     }
-  }
+  } as any
 });
 </script>
 
@@ -69,17 +77,10 @@ export default Vue.extend({
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.button-new-tag {
-  margin-left: 10px;
-  height: 32px;
-  line-height: 30px;
-  padding-top: 0;
-  padding-bottom: 0;
-}
 .input-new-tag {
   width: 200px;
   margin-left: 10px;
-  vertical-align: bottom;
+  /* vertical-align: bottom; */
 }
 
 .container {
