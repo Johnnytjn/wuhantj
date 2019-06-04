@@ -1,10 +1,8 @@
-require('@babel/polyfill');
 const Koa = require('koa');
 const Router = require('koa-router');
 const router = new Router();
 const https = require('https');
 const fs = require('fs');
-const session = require('koa-session2');
 
 // const koaStatic = require('koa-static');
 const bodyParser = require('koa-bodyparser');
@@ -12,7 +10,6 @@ const path = require('path');
 
 const app = new Koa();
 app.keys = ['po-console'];
-app.use(session({}, app));
 
 app.use(bodyParser());
 // app.use(koaStatic(path.resolve('dist')));

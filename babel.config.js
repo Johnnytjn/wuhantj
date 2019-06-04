@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ['@vue/app', '@babel/preset-env', '@babel/preset-typescript'],
+  presets: ['@vue/app'],
   plugins: [
     [
       'component',
