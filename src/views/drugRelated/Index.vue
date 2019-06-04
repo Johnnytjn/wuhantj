@@ -29,6 +29,16 @@ export default Vue.extend({
       personData: null
     };
   },
+  watch: {
+    personData(data) {
+      const elem = document.getElementsByClassName("drug-person")[0] as any;
+      if (data) {
+        elem.style.borderLeft = "1px solid rgb(238, 241, 246)";
+      } else {
+        elem.style.borderLeft = "";
+      }
+    }
+  },
   methods: {
     showPersonData(phoneNumber) {
       const loading = this.$loading({ fullscreen: true });
@@ -91,14 +101,13 @@ export default Vue.extend({
 
 .drug-graph {
   flex-grow: 2;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   height: 90%;
 }
 
 .drug-person {
   width: 510px;
   overflow-y: auto;
-  border-left: 1px solid rgb(238, 241, 246);
 }
 </style>
 

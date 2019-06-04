@@ -1,5 +1,5 @@
 <template>
-  <div v-show="personData">
+  <div id="person-container">
     <el-tabs type="card">
       <el-tab-pane label="个人信息">
         <tab-personal :personData="personalData"/>
@@ -39,6 +39,16 @@ export default Vue.extend({
   props: {
     personData: Object
   },
+  watch: {
+    personData(data) {
+      const elem = document.getElementById("person-container");
+      if (data && elem) {
+        elem.style.opacity = "1";
+      } else {
+        elem!.style.opacity = "0";
+      }
+    }
+  },
   computed: {
     personalData() {
       return this.personData && this.personData["personInfo"];
@@ -64,6 +74,11 @@ export default Vue.extend({
 .el-tab-pane {
   text-align: left;
   padding: 0px 20px 0px 20px !important;
+}
+
+#person-container {
+  transition: all 1s;
+  opacity: 0;
 }
 </style>
 

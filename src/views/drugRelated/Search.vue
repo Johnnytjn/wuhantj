@@ -12,7 +12,6 @@
         type="text"
         maxlength="11"
         minlength="11"
-        clearable
         class="input-new-tag el-tag"
         v-if="inputVisible"
         v-model="inputValue"
