@@ -1,5 +1,9 @@
 # wuhantj
 
+## Development Enviornment Requirements
+1. Node is installed - v10.16.0+, https://nodejs.org/en/
+2. yarn is installed - https://yarnpkg.com/en/
+
 ## Integration debug
 1. edit "API_BASE_URL" in .env if necessary (SERVER_PORT if necessary as well)
 2. run 'yarn start-dev'
