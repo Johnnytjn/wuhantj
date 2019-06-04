@@ -1,39 +1,16 @@
 # wuhantj
 
-## Project setup
-```
-yarn install
-```
+## Development Enviornment Requirements
+1. Node is installed - v10.16.0+, https://nodejs.org/en/
+2. yarn is installed - https://yarnpkg.com/en/
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## Integration debug
+1. edit "API_BASE_URL" in .env if necessary (SERVER_PORT if necessary as well)
+2. run 'yarn start-dev'
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+## Packaging
+In root folder, run './bin/package.sh', the package will be generated in ./package folder. 
 
-### Run your tests
-```
-yarn run test
-```
+## Deployment
+Copy the package file (wuhantj.tar.gz) onto the server and extrat it into a folder, then run 'node app.js'.
 
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your end-to-end tests
-```
-yarn run test:e2e
-```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
