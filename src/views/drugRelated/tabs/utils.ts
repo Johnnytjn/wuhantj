@@ -80,3 +80,5 @@ export const getPropValue = (personData, name) => {
     return arrayProps.includes(name) ? [] : 'N/A';
   }
 };
+
+export default {};

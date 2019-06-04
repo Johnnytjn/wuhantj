@@ -15,28 +15,22 @@ module.exports = class BackendAPI {
     }
     console.log('axios config:', config);
 
-    return axios(config).then(res => res.data);
+    return axios(config)
+      .then(res => res.data)
+      .catch(err => {
+        console.log('Error: ', err);
+      });
   }
 
-  async getPersonData(phoneNumber) {
-    let rawData;
-    if (this.baseUrl) {
-      const url = this.baseUrl + '/drug-related-pers/' + phoneNumber;
-      rawData = await invoke({ url, method: 'get' });
-    } else {
-      rawData = require('./fakedata/person.json');
-    }
-    return rawData;
+  getPersonData(phoneNumber) {
+    const url = this.baseUrl + '/drug-related-pers/' + phoneNumber;
+    return this.invoke({ url });
   }
 
   async getRelatedPerGraph(phoneNumbers) {
     let rawData;
-    if (this.baseUrl) {
-      const url = this.baseUrl + '/drug-related-pers/graph';
-      rawData = await invoke({ url, method: 'post', data: { phone_nums: phoneNumbers } });
-    } else {
-      rawData = require('./fakedata/graph.json');
-    }
+    const url = this.baseUrl + '/drug-related-pers/graph';
+    rawData = await this.invoke({ url, method: 'post', data: { phone_nums: phoneNumbers } });
 
     const result = { 'no-data': rawData['no-data'] };
     if (rawData && Object.keys(rawData['relationships']).length > 0) {

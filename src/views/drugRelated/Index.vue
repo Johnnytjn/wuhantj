@@ -20,6 +20,7 @@ import Search from "./Search.vue";
 import Graph from "./Graph.vue";
 import PersonInfo from "./PersonInfo.vue";
 import apiClient from "../../utils/api-client";
+
 export default Vue.extend({
   components: { PersonInfo, Search, Graph },
   data() {
@@ -37,6 +38,7 @@ export default Vue.extend({
           this.personData = data;
         })
         .catch(error => {
+          console.error(error);
           this.$error("加载个人信息时系统出错！");
         })
         .finally(() => {
@@ -54,6 +56,7 @@ export default Vue.extend({
           }
         })
         .catch(error => {
+          console.error(error);
           this.$error("搜索时系统出错！");
         })
         .finally(() => {

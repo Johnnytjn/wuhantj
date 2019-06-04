@@ -1,50 +1,23 @@
-require('@babel/polyfill');
-const Koa = require('koa');
-const Router = require('koa-router');
-const router = new Router();
+require('dotenv').config();
+var Koa = require('koa');
+var Router = require('koa-router');
 const https = require('https');
 const fs = require('fs');
-const session = require('koa-session2');
-
-const koaStatic = require('koa-static');
-const historyApiFallback = require('koa-history-api-fallback');
-const bodyParser = require('koa-bodyparser');
 const path = require('path');
+const bodyParser = require('koa-bodyparser');
+const historyApiFallback = require('koa-history-api-fallback');
+const koaStatic = require('koa-static');
 
-const auth = require('./auth/ssoAuth');
-
-const app = new Koa();
-app.keys = ['po-console'];
-app.use(session({}, app));
-
-auth.setUp(app);
+var app = new Koa();
+var router = new Router();
 
 app.use(bodyParser());
 app.use(koaStatic(path.resolve('dist')));
 
-app.use(async (ctx, next) => {
-  try {
-    await next();
-  } catch (err) {
-    ctx.status = (err.response && err.response.status) || 500;
-    // ctx.body = err.message;
-    ctx.body = (err.response && err.response.data.message) || err.message;
-    ctx.app.emit('error', err, ctx);
-  }
-});
-
 require('./router')(router);
-app
-  .use(auth.ensureAuthenticated)
-  .use(router.routes())
-  .use(router.allowedMethods());
+
+app.use(router.routes()).use(router.allowedMethods());
 app.use(historyApiFallback());
-
-app.on('error', (err, ctx) => {
-  console.log(err);
-});
-
-// app.listen(8000);
 https
   .createServer(
     {
@@ -53,4 +26,4 @@ https
     },
     app.callback()
   )
-  .listen(8000);
+  .listen(process.env.SERVER_PORT || 8000);
