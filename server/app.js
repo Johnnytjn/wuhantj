@@ -7,6 +7,7 @@ const path = require('path');
 const bodyParser = require('koa-bodyparser');
 const historyApiFallback = require('koa-history-api-fallback');
 const koaStatic = require('koa-static');
+const compress = require('koa-compress');
 
 var app = new Koa();
 var router = new Router();
@@ -18,6 +19,8 @@ require('./router')(router);
 
 app.use(router.routes()).use(router.allowedMethods());
 app.use(historyApiFallback());
+app.use(compress({}));
+
 https
   .createServer(
     {
