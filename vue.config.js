@@ -21,13 +21,13 @@ module.exports = {
       localeDir: 'locales',
       enableInSFC: false
     }
-  }
+  },
 
-  // configureWebpack: config => {
-  //   // if (isProduction) {
-  //   config.externals = {
-  //     echarts: 'echarts'
-  //   };
-  //   // }
-  // }
+  configureWebpack: config => {
+    // if (isProduction) {
+    config.externals = {
+      echarts: 'echarts'
+    };
+    // }
+  }
 };

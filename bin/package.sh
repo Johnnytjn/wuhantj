@@ -2,7 +2,7 @@
 
 pkgname=wuhantj.tar.gz
 pkg_dir=package
-build_dir=./build
+build_dir=build
 
 mkdir ./${pkg_dir}
 mkdir ${build_dir}
@@ -17,15 +17,17 @@ cp -Ra server/* ${build_dir}
 # copy config file
 cp .env ${build_dir}
 
-cd ${build_dir}
+cp ./package.json ./${build_dir}
+cp ./yarn.lock ./${build_dir}
+cd ./${build_dir}
 
 if [ "$SKIP_DOWNLOAD_PACKAGE" = "true" ];then 
     echo "Skip downloading npm packages."
 else
     echo "Download npm packages."
-    cp ../package.json ${build_dir}
-    export NODE_ENV=production
-    yarn  
+    NODE_ENV=production yarn  
+    rm -rf package.json
+    rm -rf yarn.lock
 fi
 
 if [ $? -eq 1 ]; then
