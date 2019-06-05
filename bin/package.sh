@@ -5,7 +5,7 @@ pkg_dir=package
 build_dir=build
 
 mkdir ./${pkg_dir}
-mkdir ${build_dir}
+mkdir ./${build_dir}
 rm -rf ./${pkg_dir}/$pkgname
 rm -rf ${build_dir}/*
 
