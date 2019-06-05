@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = {
+  productionSourceMap: false,
   devServer: {
     proxy: {
       '^/(api|auth|error)': {
