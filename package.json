@@ -20,7 +20,8 @@
     "koa-bodyparser": "^4.2.1",
     "koa-history-api-fallback": "^1.0.0",
     "koa-router": "^7.4.0",
-    "koa-static": "^5.0.0"
+    "koa-static": "^5.0.0",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "core-js": "^2.6.5",
@@ -28,7 +29,6 @@
     "nodemon": "^1.19.1",
     "element-ui": "^2.4.5",
     "register-service-worker": "^1.6.2",
-    "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",

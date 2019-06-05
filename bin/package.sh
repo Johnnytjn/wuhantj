@@ -23,7 +23,7 @@ if [ "$SKIP_DOWNLOAD_PACKAGE" = "true" ];then
     echo "Skip downloading npm packages."
 else
     echo "Download npm packages."
-    cp package.json ${build_dir}
+    cp ../package.json ${build_dir}
     export NODE_ENV=production
     yarn  
 fi
