@@ -7,6 +7,7 @@ build_dir=./build
 mkdir ./${pkg_dir}
 mkdir ${build_dir}
 rm -rf ./${pkg_dir}/$pkgname
+rm -rf ${build_dir}/*
 
 # copy client code
 yarn run build
@@ -16,10 +17,16 @@ cp -Ra server/* ${build_dir}
 # copy config file
 cp .env ${build_dir}
 
-cp package.json ${build_dir}
-export NODE_ENV=production
 cd ${build_dir}
-yarn
+
+if [ "$SKIP_DOWNLOAD_PACKAGE" = "true" ];then 
+    echo "Skip downloading npm packages."
+else
+    echo "Download npm packages."
+    cp package.json ${build_dir}
+    export NODE_ENV=production
+    yarn  
+fi
 
 if [ $? -eq 1 ]; then
     echo "Error occured during install npm packages. Try to rebuild again."
