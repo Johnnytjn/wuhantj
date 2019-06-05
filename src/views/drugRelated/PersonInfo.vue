@@ -41,7 +41,7 @@ export default Vue.extend({
   },
   watch: {
     personData(data) {
-      const elem = document.getElementById("person-container");
+      const elem = document.querySelector("#person-container") as any;
       if (data && elem) {
         elem.style.opacity = "1";
       } else {

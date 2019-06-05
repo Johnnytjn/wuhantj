@@ -41,7 +41,11 @@ export default Vue.extend({
   },
   methods: {
     showPersonData(phoneNumber) {
-      const loading = this.$loading({ fullscreen: true });
+      this.personData = null;
+      const loading = this.$loading({
+        fullscreen: false,
+        target: ".drug-person"
+      });
       apiClient
         .getPersonData(phoneNumber)
         .then(data => {
@@ -56,7 +60,11 @@ export default Vue.extend({
         });
     },
     handleSearch(phoneNumbers) {
-      const loading = this.$loading({ fullscreen: true });
+      this.graphData = null;
+      const loading = this.$loading({
+        fullscreen: false,
+        target: ".drug-graph"
+      });
       apiClient
         .getDrugRelatedPersGraph(phoneNumbers)
         .then(data => {
