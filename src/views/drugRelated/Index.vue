@@ -72,6 +72,9 @@ export default Vue.extend({
           if (data && data.graph && data.graph.nodes && data.graph.nodes[0]) {
             this.showPersonData(data.graph.nodes[0].id);
           }
+          if (data && data["no-data"] && data["no-data"].length > 0) {
+            this.$error("以下电话没有匹配数据: " + data["no-data"].join(","));
+          }
         })
         .catch(error => {
           console.error(error);
