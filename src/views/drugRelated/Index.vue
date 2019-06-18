@@ -117,7 +117,7 @@ export default Vue.extend({
 }
 
 .drug-person {
-  width: 510px;
+  width: 30%;
   overflow-y: auto;
 }
 </style>

@@ -21,10 +21,10 @@
     "koa-compress": "^3.0.0",
     "koa-history-api-fallback": "^1.0.0",
     "koa-router": "^7.4.0",
-    "koa-static": "^5.0.0"
+    "koa-static": "^5.0.0",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
-    "vue": "^2.6.10",
     "compression-webpack-plugin": "^2.0.0",
     "@types/jest": "^23.1.4",
     "@vue/cli-plugin-babel": "^3.8.0",
