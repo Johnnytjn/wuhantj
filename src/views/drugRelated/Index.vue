@@ -51,8 +51,8 @@ export default Vue.extend({
         .then(data => {
           this.personData = data;
         })
-        .catch(error => {
-          console.error(error);
+        .catch(() => {
+          // console.error(error);
           this.$error("加载个人信息时系统出错！");
         })
         .finally(() => {
@@ -76,8 +76,8 @@ export default Vue.extend({
             this.$error("以下电话没有匹配数据: " + data["no-data"].join(","));
           }
         })
-        .catch(error => {
-          console.error(error);
+        .catch(() => {
+          // console.error(error);
           this.$error("搜索时系统出错！");
         })
         .finally(() => {

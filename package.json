@@ -22,7 +22,8 @@
     "koa-history-api-fallback": "^1.0.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "echarts": "4.2.1"
   },
   "devDependencies": {
     "compression-webpack-plugin": "^2.0.0",
@@ -40,7 +41,6 @@
     "babel-eslint": "^10.0.1",
     "babel-plugin-component": "^1.1.1",
     "core-js": "^2.6.5",
-    "echarts": "4.2.1",
     "element-ui": "^2.4.5",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
