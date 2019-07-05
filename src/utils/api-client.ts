@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const BaseURL = {
-  drugRelatedPers: '/api/drug-related-pers'
+  drug: '/api/drug-related-pers',
+  whoring: '/api/whoring-related-pers'
 };
 
 axios.interceptors.response.use(
@@ -43,17 +44,17 @@ class APIClient {
     return axios(config).then(res => res.data);
   }
 
-  getDrugRelatedPersGraph(phoneNumbers: string[]) {
+  getGraph(type, phoneNumbers: string[]) {
     return this.invoke({
-      url: BaseURL.drugRelatedPers + '/graph',
+      url: BaseURL[type] + '/graph',
       method: 'post',
       data: { phoneNumbers }
     });
   }
 
-  getPersonData(phoneNumber: string) {
+  getPersonData(type, phoneNumber: string) {
     return this.invoke({
-      url: BaseURL.drugRelatedPers + '/' + phoneNumber
+      url: BaseURL[type] + '/' + phoneNumber
     });
   }
 }

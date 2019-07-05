@@ -1,14 +1,14 @@
 <template>
   <div class="drug-main">
     <div class="drug-search">
-      <search :onSearch="handleSearch"/>
+      <search :onSearch="handleSearch" :type="type" />
     </div>
     <div class="drug-content">
       <div class="drug-graph">
-        <graph :graphData="graphData" :onPersonSelected="showPersonData"/>
+        <graph :graphData="graphData" :onPersonSelected="showPersonData" :type="type" />
       </div>
       <div class="drug-person">
-        <person-info :personData="personData"/>
+        <person-info :personData="personData" :type="type" />
       </div>
     </div>
   </div>
@@ -26,10 +26,24 @@ export default Vue.extend({
   data() {
     return {
       graphData: null,
-      personData: null
+      personData: null,
+      type: this.$route.params.type
     };
   },
   watch: {
+    $route(newData, oldData) {
+      const newType = newData.params.type;
+      const oldType = oldData.params.type;
+      console.log(newType, oldType);
+      if (oldType !== newType) {
+        this.type = newType;
+        this.personData = null;
+        this.graphData = null;
+        this.$clearMessage();
+        // console.log(">>>>> force");
+        // this.$forceUpdate();
+      }
+    },
     personData(data) {
       const elem = document.getElementsByClassName("drug-person")[0] as any;
       if (data) {
@@ -47,7 +61,7 @@ export default Vue.extend({
         target: ".drug-person"
       });
       apiClient
-        .getPersonData(phoneNumber)
+        .getPersonData(this.type, phoneNumber)
         .then(data => {
           this.personData = data;
         })
@@ -66,7 +80,7 @@ export default Vue.extend({
         target: ".drug-graph"
       });
       apiClient
-        .getDrugRelatedPersGraph(phoneNumbers)
+        .getGraph(this.type, phoneNumbers)
         .then(data => {
           this.graphData = data;
           if (data && data.graph && data.graph.nodes && data.graph.nodes[0]) {

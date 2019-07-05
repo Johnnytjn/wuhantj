@@ -2,19 +2,19 @@
   <div id="person-container">
     <el-tabs type="card">
       <el-tab-pane label="个人信息">
-        <tab-personal :personData="personalData"/>
+        <tab-personal :personData="personalData" />
       </el-tab-pane>
       <el-tab-pane label="通联信息">
-        <tab-comm :personData="commData"/>
+        <tab-comm :personData="commData" />
       </el-tab-pane>
       <el-tab-pane label="轨迹信息">
-        <tab-track :personData="trackData"/>
+        <tab-track :personData="trackData" />
       </el-tab-pane>
       <el-tab-pane label="前科信息">
-        <tab-criminal-record :personData="criminalRecordData"/>
+        <tab-criminal-record :personData="criminalRecordData" />
       </el-tab-pane>
       <el-tab-pane label="寄送信息">
-        <tab-post-info :personData="postInfoData"/>
+        <tab-post-info :personData="postInfoData" />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -22,11 +22,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import TabPersonal from "./tabs/Personal.vue";
-import TabComm from "./tabs/Comm.vue";
-import TabTrack from "./tabs/Track.vue";
-import TabCriminalRecord from "./tabs/CriminalRecord.vue";
-import TabPostInfo from "./tabs/PostInfo.vue";
+import TabPersonal from "./tabs/drug/Personal.vue";
+import TabComm from "./tabs/drug/Comm.vue";
+import TabTrack from "./tabs/drug/Track.vue";
+import TabCriminalRecord from "./tabs/drug/CriminalRecord.vue";
+import TabPostInfo from "./tabs/drug/PostInfo.vue";
 
 export default Vue.extend({
   components: {
@@ -37,7 +37,8 @@ export default Vue.extend({
     TabPostInfo
   },
   props: {
-    personData: Object
+    personData: Object,
+    type: String
   },
   watch: {
     personData(data) {

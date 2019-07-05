@@ -7,12 +7,12 @@
     </el-header>
     <el-container style="flex-grow:2; border: 1px solid #eee;height:90%;">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu default-active="/drug-related" class="el-menu-vertical-demo" router>
-          <el-menu-item index="/drug-related">
+        <el-menu default-active="/main/drug" class="el-menu-vertical-demo" router>
+          <el-menu-item index="/main/drug">
             <i class="el-icon-menu"></i>
             <span>涉毒研判模型</span>
           </el-menu-item>
-          <el-menu-item index="/" disabled>
+          <el-menu-item index="/main/whoring">
             <i class="el-icon-menu"></i>
             <span>涉黄研判模型</span>
           </el-menu-item>
@@ -24,7 +24,7 @@
       </el-aside>
       <el-container style="height:100%;">
         <el-main style="height:100%;">
-          <router-view/>
+          <router-view />
         </el-main>
       </el-container>
     </el-container>
@@ -41,21 +41,27 @@ Vue.component("data-field", DataField);
 Vue.component("data-table", DataTable);
 Vue.component("v-data-table", VDataTable);
 
+let messageHandle;
+
 Vue.prototype.$success = function(message) {
-  this.$message({
+  messageHandle = this.$message({
     message,
     type: "success"
   });
 };
 
 Vue.prototype.$error = function(message) {
-  this.$message({
+  messageHandle = this.$message({
     message,
     type: "error",
     duration: 0,
     showClose: true,
     dangerouslyUseHTMLString: true
   });
+};
+
+Vue.prototype.$clearMessage = function() {
+  messageHandle && messageHandle.close();
 };
 
 export default {

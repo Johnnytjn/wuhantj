@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import DrugRelated from './views/drugRelated/Index.vue';
+import MainPage from './views/main/Index.vue';
 
 Vue.use(Router);
 
@@ -11,15 +11,15 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: DrugRelated
+      redirect: '/main/drug'
     },
     {
-      path: '/drug-related',
-      name: 'drug-related',
+      path: '/main/:type',
+      name: 'main',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: DrugRelated
+      component: MainPage
     }
   ]
 });

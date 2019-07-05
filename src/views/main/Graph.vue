@@ -1,6 +1,6 @@
 <template>
   <div class="graph-container">
-    <div id="drugRelatedPerGraph"/>
+    <div id="drugRelatedPerGraph" />
   </div>
 </template>
 
@@ -11,7 +11,8 @@ import echarts from "echarts";
 export default Vue.extend({
   props: {
     graphData: Object,
-    onPersonSelected: Function
+    onPersonSelected: Function,
+    type: String
   },
   data(): any {
     return {
@@ -20,6 +21,11 @@ export default Vue.extend({
   },
   watch: {
     graphData(newData) {
+      if (!newData && this.chart) {
+        this.chart.clear();
+        return;
+      }
+
       const graph = newData.graph;
       const categoryCount = graph["categoryCount"];
       const nodeData = graph.nodes.map(n => {

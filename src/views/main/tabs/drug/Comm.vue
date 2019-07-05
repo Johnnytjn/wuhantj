@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { getPropValue } from "./utils";
+import { getPropValue } from "../utils";
 
 export default Vue.extend({
   data() {

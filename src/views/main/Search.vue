@@ -34,7 +34,8 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: {
-    onSearch: Function
+    onSearch: Function,
+    type: String
   },
   data() {
     return {
@@ -42,6 +43,14 @@ export default Vue.extend({
       inputVisible: true,
       inputValue: ""
     };
+  },
+  watch: {
+    type(newData, oldData) {
+      console.log("$$$$", newData, oldData);
+      if (newData !== oldData) {
+        this.reset();
+      }
+    }
   },
   methods: {
     submit() {
