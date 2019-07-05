@@ -54,9 +54,11 @@ export default Vue.extend({
   },
   methods: {
     submit() {
+      this.$clearMessage();
       this.onSearch(this.dynamicTags);
     },
     reset() {
+      this.$clearMessage();
       this.dynamicTags = [];
     },
     handleClose(tag) {

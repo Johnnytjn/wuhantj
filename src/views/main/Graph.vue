@@ -29,7 +29,7 @@ export default Vue.extend({
       const graph = newData.graph;
       const categoryCount = graph["categoryCount"];
       const nodeData = graph.nodes.map(n => {
-        const isTargetNode = n.type === "target";
+        const isTargetNode = n.dataType === "target";
         const item = {
           itemStyle: {
             opacity: isTargetNode ? 1 : +n.score * 0.01
@@ -80,8 +80,10 @@ export default Vue.extend({
               show: true,
               fontSize: 18,
               formatter: params => {
-                const { type, score, name } = params.data;
-                return type === "target" ? name : `${name}\n(${score}%)`;
+                const { dataType, score, name, type } = params.data;
+                return dataType === "target" || type === "cosmetic"
+                  ? name
+                  : `${name}\n(${score}%)`;
               }
             }
           }
@@ -99,8 +101,10 @@ export default Vue.extend({
       { renderer: "svg" }
     );
     this.chart.on("click", function(params) {
-      const phoneNumber = params.data.id;
-      that.onPersonSelected(phoneNumber);
+      const { id: phoneNumber, type } = params.data;
+      if (type === "person") {
+        that.onPersonSelected(phoneNumber);
+      }
     });
     window.onresize = this.chart.resize;
   }

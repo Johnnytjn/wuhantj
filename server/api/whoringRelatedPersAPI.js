@@ -40,36 +40,47 @@ module.exports = class BackendAPI {
       const personData = rawData['person-data'];
       const targetNums = Object.keys(relationships);
       Object.entries(personData).forEach(([phoneNumber, person]) => {
-        const { name: personName, score: rawScore } = person;
-        const score = +(+rawScore.toFixed(2));
-        const type = targetNums.includes(phoneNumber) ? 'target' : 'contact';
-        // const name = type === 'target' ? personName : `${personName} (${score} %)`;
+        const { name: personName, score: rawScore, type } = person;
+        const dataType = targetNums.includes(phoneNumber) ? 'target' : 'contact';
         const name = personName;
-        graphData['nodes'].push({ id: phoneNumber, name, score, type });
+        const nodeData = { id: phoneNumber, name, dataType, type };
+        if (type === 'person') {
+          nodeData['score'] = +(+rawScore.toFixed(2));
+        } else {
+          nodeData['category'] = 0;
+        }
+        graphData['nodes'].push(nodeData);
       });
 
-      const addCategoryAttr = (phoneNumber, categoryId) => {
+      const addCategoryAttr = (phoneNumber, categoryId, nodeType) => {
         const nodeIndex = graphData['nodes'].findIndex(x => x.id === phoneNumber);
         const node = graphData['nodes'][nodeIndex];
-        if (node['type'] === 'target') {
-          if (!node['category']) {
+        if (node['dataType'] === 'target') {
+          if (nodeType === 'source') {
             node['category'] = categoryId;
+          } else {
+            if (!node['category']) {
+              node['category'] = categoryId;
+            }
           }
         } else {
-          node['category'] = categoryId;
+          if (node['type'] !== 'cosmetic') {
+            node['category'] = categoryId;
+          }
         }
         graphData['nodes'][nodeIndex] = node;
       };
 
       Object.entries(relationships).forEach(([sourceNum, contactNums], index) => {
-        addCategoryAttr(sourceNum, index);
+        const categoryId = index + 1;
+        addCategoryAttr(sourceNum, categoryId, 'source');
         contactNums.forEach(targetNum => {
-          addCategoryAttr(targetNum, index);
+          addCategoryAttr(targetNum, categoryId, 'target');
           graphData['links'].push({ source: sourceNum, target: targetNum });
         });
       });
 
-      graphData['categoryCount'] = targetNums.length;
+      graphData['categoryCount'] = targetNums.length + 1;
 
       result['graph'] = graphData;
     }
