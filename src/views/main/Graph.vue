@@ -102,7 +102,7 @@ export default Vue.extend({
     );
     this.chart.on("click", function(params) {
       const { id: phoneNumber, type } = params.data;
-      if (type === "person") {
+      if (type !== "cosmetic") {
         that.onPersonSelected(phoneNumber);
       }
     });
