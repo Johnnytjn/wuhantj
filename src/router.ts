@@ -9,16 +9,16 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
-      redirect: '/main/drug'
-    },
-    {
       path: '/main/:type',
       name: 'main',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
+      component: MainPage
+    },
+    {
+      path: '*',
+      name: 'home',
       component: MainPage
     }
   ]
