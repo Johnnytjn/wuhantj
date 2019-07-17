@@ -27,7 +27,7 @@ export default Vue.extend({
     return {
       graphData: null,
       personData: null,
-      type: this.$route.params.type
+      type: this.$route.params.type || "drug"
     };
   },
   watch: {

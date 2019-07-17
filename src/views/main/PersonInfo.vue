@@ -31,7 +31,7 @@ import WhoringTabPersonal from "./tabs/whoring/Personal.vue";
 import WhoringTabComm from "./tabs/whoring/Comm.vue";
 import WhoringTabTrack from "./tabs/whoring/Track.vue";
 import WhoringTabCriminalRecord from "./tabs/whoring/CriminalRecord.vue";
-import WhoringTabPostInfo from "./tabs/whoring/PostInfo.vue";
+// import WhoringTabPostInfo from "./tabs/whoring/PostInfo.vue";
 
 const TAB_COMPONENTS = {
   drug: {
