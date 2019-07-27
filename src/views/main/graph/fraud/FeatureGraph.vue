@@ -151,7 +151,11 @@ export default Vue.extend({
         title: { text: "主要通联号码归属地分布", left: "center" },
         xAxis: {
           type: "category",
-          data: graphData.map(x => x["city_name"])
+          data: graphData.map(x => x["city_name"]),
+          axisLabel: {
+            rotate: 30,
+            interval: 0
+          }
         },
         yAxis: {
           type: "value",
