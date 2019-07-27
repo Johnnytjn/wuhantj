@@ -5,7 +5,13 @@
     </div>
     <div class="drug-content">
       <div class="drug-graph">
-        <graph :graphData="graphData" :onPersonSelected="showPersonData" :type="type" />
+        <graph
+          :graphData="graphData"
+          :onPersonSelected="showPersonData"
+          :type="type"
+          v-if="type!=='fraud'"
+        />
+        <feature-graph :graphData="graphData" v-if="type==='fraud'" />
       </div>
       <div class="drug-person">
         <person-info :personData="personData" :type="type" />
@@ -18,11 +24,12 @@
 import Vue from "vue";
 import Search from "./Search.vue";
 import Graph from "./Graph.vue";
+import FeatureGraph from "./graph/fraud/FeatureGraph.vue";
 import PersonInfo from "./PersonInfo.vue";
 import apiClient from "../../utils/api-client";
 
 export default Vue.extend({
-  components: { PersonInfo, Search, Graph },
+  components: { PersonInfo, Search, Graph, FeatureGraph },
   data() {
     return {
       graphData: null,
@@ -84,8 +91,8 @@ export default Vue.extend({
         apiClient
           .getFraudInfo(phoneNumbers[0])
           .then(data => {
-            console.log("#####", data);
             if (data["exist"] === 1) {
+              this.graphData = data.show_feature;
               this.personData = data;
             } else {
               this.$error("该电话没有匹配数据");

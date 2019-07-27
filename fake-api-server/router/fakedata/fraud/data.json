@@ -16,7 +16,9 @@
     "home_area": [
       { "city_name": "上海", "num": 10 },
       { "city_name": "武汉", "num": 8 },
-      { "city_name": "贵阳", "num": 6 }
+      { "city_name": "贵阳", "num": 6 },
+      { "city_name": "北京", "num": 8 },
+      { "city_name": "广州", "num": 6 }
     ]
   },
   "basic-info": {
