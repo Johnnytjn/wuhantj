@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const BaseURL = {
   drug: '/api/drug-related-pers',
-  whoring: '/api/whoring-related-pers'
+  whoring: '/api/whoring-related-pers',
+  fraud: '/api/fraud-info'
 };
 
 axios.interceptors.response.use(
@@ -55,6 +56,12 @@ class APIClient {
   getPersonData(type, phoneNumber: string) {
     return this.invoke({
       url: BaseURL[type] + '/' + phoneNumber
+    });
+  }
+
+  getFraudInfo(phoneNumber: string) {
+    return this.invoke({
+      url: BaseURL['fraud'] + '/' + phoneNumber
     });
   }
 }

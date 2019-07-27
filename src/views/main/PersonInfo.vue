@@ -1,16 +1,16 @@
 <template>
   <div id="person-container">
     <el-tabs type="card">
-      <el-tab-pane label="个人信息">
+      <el-tab-pane :label="type==='fraud'?'基本信息':'个人信息'">
         <component :is="tabPersonal" :personData="personalData" />
       </el-tab-pane>
       <el-tab-pane label="通联信息">
         <component :is="tabComm" :personData="commData" />
       </el-tab-pane>
-      <el-tab-pane label="轨迹信息">
+      <el-tab-pane label="轨迹信息" v-if="type!=='fraud'">
         <component :is="tabTrack" :personData="trackData" />
       </el-tab-pane>
-      <el-tab-pane label="前科信息">
+      <el-tab-pane label="前科信息" v-if="type!=='fraud'">
         <component :is="tabCriminalRecord" :personData="criminalRecordData" />
       </el-tab-pane>
       <el-tab-pane label="寄送信息" v-if="type==='drug'">
@@ -32,6 +32,8 @@ import WhoringTabComm from "./tabs/whoring/Comm.vue";
 import WhoringTabTrack from "./tabs/whoring/Track.vue";
 import WhoringTabCriminalRecord from "./tabs/whoring/CriminalRecord.vue";
 // import WhoringTabPostInfo from "./tabs/whoring/PostInfo.vue";
+import FraudTabPersonal from "./tabs/fraud/Personal.vue";
+import FraudTabComm from "./tabs/fraud/Comm.vue";
 
 const TAB_COMPONENTS = {
   drug: {
@@ -46,6 +48,10 @@ const TAB_COMPONENTS = {
     TabComm: WhoringTabComm,
     TabTrack: WhoringTabTrack,
     TabCriminalRecord: WhoringTabCriminalRecord
+  },
+  fraud: {
+    TabPersonal: FraudTabPersonal,
+    TabComm: FraudTabComm
   }
 };
 
@@ -81,10 +87,16 @@ export default Vue.extend({
       return TAB_COMPONENTS[this.type]["TabPostInfo"];
     },
     personalData() {
-      return this.personData && this.personData["personInfo"];
+      return (
+        this.personData &&
+        this.personData[this.type === "fraud" ? "basic-info" : "personInfo"]
+      );
     },
     commData() {
-      return this.personData && this.personData["linkInfo"];
+      return (
+        this.personData &&
+        this.personData[this.type === "fraud" ? "link_info" : "linkInfo"]
+      );
     },
     trackData() {
       return this.personData && this.personData["trackInfo"];

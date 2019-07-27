@@ -1,5 +1,6 @@
 const DrugRelatedPersAPI = require('../api/drugRelatedPersAPI');
 const WhoringRelatedPersAPI = require('../api/whoringRelatedPersAPI');
+const FraudAPI = require('../api/fraudAPI');
 
 const apiBaseUrl = process.env.API_BASE_URL;
 if (apiBaseUrl) {
@@ -11,6 +12,7 @@ if (apiBaseUrl) {
 
 const drugRelatedPersAPI = new DrugRelatedPersAPI({ baseUrl: apiBaseUrl });
 const whoringRelatedPersAPI = new WhoringRelatedPersAPI({ baseUrl: apiBaseUrl });
+const fraudAPI = new FraudAPI({ baseUrl: apiBaseUrl });
 
 module.exports = function(router) {
   router.prefix('/api');
@@ -29,5 +31,9 @@ module.exports = function(router) {
   router.get('/whoring-related-pers/:phoneNumber', async ctx => {
     const { phoneNumber } = ctx.params;
     ctx.body = await whoringRelatedPersAPI.getPersonData(phoneNumber);
+  });
+  router.get('/fraud-info/:phoneNumber', async ctx => {
+    const { phoneNumber } = ctx.params;
+    ctx.body = await fraudAPI.getFraudInfo(phoneNumber);
   });
 };

@@ -16,7 +16,7 @@
             <i class="el-icon-menu"></i>
             <span>涉黄研判模型</span>
           </el-menu-item>
-          <el-menu-item index="/" disabled>
+          <el-menu-item index="/main/fraud">
             <i class="el-icon-menu"></i>
             <span>电信诈骗研判模型</span>
           </el-menu-item>

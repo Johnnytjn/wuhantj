@@ -79,24 +79,45 @@ export default Vue.extend({
         fullscreen: false,
         target: ".drug-graph"
       });
-      apiClient
-        .getGraph(this.type, phoneNumbers)
-        .then(data => {
-          this.graphData = data;
-          if (data && data.graph && data.graph.nodes && data.graph.nodes[0]) {
-            this.showPersonData(data.graph.nodes[0].id);
-          }
-          if (data && data["no-data"] && data["no-data"].length > 0) {
-            this.$error("以下电话没有匹配数据: " + data["no-data"].join(","));
-          }
-        })
-        .catch(() => {
-          // console.error(error);
-          this.$error("搜索时系统出错！");
-        })
-        .finally(() => {
-          loading.close();
-        });
+
+      if (this.type === "fraud") {
+        apiClient
+          .getFraudInfo(phoneNumbers[0])
+          .then(data => {
+            console.log("#####", data);
+            if (data["exist"] === 1) {
+              this.personData = data;
+            } else {
+              this.$error("该电话没有匹配数据");
+            }
+          })
+          .catch(() => {
+            // console.error(error);
+            this.$error("搜索时系统出错！");
+          })
+          .finally(() => {
+            loading.close();
+          });
+      } else {
+        apiClient
+          .getGraph(this.type, phoneNumbers)
+          .then(data => {
+            this.graphData = data;
+            if (data && data.graph && data.graph.nodes && data.graph.nodes[0]) {
+              this.showPersonData(data.graph.nodes[0].id);
+            }
+            if (data && data["no-data"] && data["no-data"].length > 0) {
+              this.$error("以下电话没有匹配数据: " + data["no-data"].join(","));
+            }
+          })
+          .catch(() => {
+            // console.error(error);
+            this.$error("搜索时系统出错！");
+          })
+          .finally(() => {
+            loading.close();
+          });
+      }
     }
   } as any
 });

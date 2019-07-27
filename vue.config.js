@@ -29,9 +29,9 @@ module.exports = {
 
   configureWebpack: config => {
     // if (isProduction) {
-    config.externals = {
-      echarts: 'echarts'
-    };
+    // config.externals = {
+    //   echarts: 'echarts'
+    // };
     // }
     if (isProduction) {
       config.plugins.push(

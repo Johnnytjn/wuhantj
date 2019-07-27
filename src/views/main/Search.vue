@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <div class="tag-container">
+    <!-- drug and whoring  -->
+    <div class="tag-container" v-if="type==='drug'||type==='whoring'">
       <el-tag
         :key="tag"
         v-for="tag in dynamicTags"
@@ -13,7 +14,6 @@
         maxlength="11"
         minlength="11"
         class="input-new-tag el-tag"
-        v-if="inputVisible"
         v-model="inputValue"
         ref="saveTagInput"
         size="mini"
@@ -22,9 +22,27 @@
         placeholder="请输入目标人员电话并回车"
       ></el-input>
     </div>
-    <div class="button-container">
+    <div class="button-container" v-if="type==='drug'||type==='whoring'">
       <el-button type="primary" @click="submit" :disabled="dynamicTags.length===0">搜索</el-button>
       <el-button @click="reset" :disabled="dynamicTags.length===0">清空</el-button>
+    </div>
+    <!-- fraud  -->
+    <div class="tag-container" v-if="type==='fraud'">
+      <el-input
+        type="text"
+        maxlength="11"
+        minlength="11"
+        class="input-new-tag el-tag"
+        v-model="inputValue"
+        ref="saveTagInput"
+        size="mini"
+        placeholder="请输入嫌疑电话"
+        @keyup.enter.native="submitFraud"
+      ></el-input>
+    </div>
+    <div class="button-container" v-if="type==='fraud'">
+      <el-button type="primary" @click="submitFraud" :disabled="testFraudInput()">搜索</el-button>
+      <el-button @click="resetFraud" :disabled="inputValue===''">清空</el-button>
     </div>
   </div>
 </template>
@@ -40,15 +58,14 @@ export default Vue.extend({
   data() {
     return {
       dynamicTags: new Array(),
-      inputVisible: true,
       inputValue: ""
     };
   },
   watch: {
     type(newData, oldData) {
-      console.log("$$$$", newData, oldData);
       if (newData !== oldData) {
         this.reset();
+        this.inputValue = "";
       }
     }
   },
@@ -75,6 +92,19 @@ export default Vue.extend({
         this.inputValue = "";
       } else {
         this.$error("请输入长度为11位的手机号");
+      }
+    },
+    testFraudInput() {
+      return !/\d{11}/.test(this.inputValue);
+    },
+    resetFraud() {
+      this.inputValue = "";
+    },
+    submitFraud() {
+      if (this.testFraudInput()) {
+        this.$error("请输入长度为11位的手机号");
+      } else {
+        this.onSearch([this.inputValue]);
       }
     }
   } as any

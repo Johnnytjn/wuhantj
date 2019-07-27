@@ -1,0 +1,50 @@
+{
+  "exist": 1,
+  "show_feature": {
+    "call": {
+      "bj": 7,
+      "zj": 2,
+      "bjbd": 3,
+      "bjwd": 4
+    },
+    "time": ["6:00-8:00", "14:00-16:00", "18:00-20:00"],
+    "msg": {
+      "other": 4,
+      "query": 3,
+      "bank": 5
+    },
+    "home_area": [
+      { "city_name": "上海", "num": 10 },
+      { "city_name": "武汉", "num": 8 },
+      { "city_name": "贵阳", "num": 6 }
+    ]
+  },
+  "basic-info": {
+    "home_area": "武汉",
+    "score": 80.0,
+    "active_region": [
+      { "CI": "12015", "address": "武汉" },
+      { "CI": "12345", "address": "上海" }
+    ]
+  },
+  "link_info": {
+    "sms": {
+      "query_num": 12,
+      "query_freq": 12,
+      "bank_num": 12,
+      "bank_freq": 3
+    },
+    "call": {
+      "zj": 12,
+      "bj": 12,
+      "bjwd": 98.5,
+      "query_num": 8,
+      "query_freq": 12,
+      "zj_aver": 12,
+      "bj_aver": 12
+    },
+    "event": {
+      "sjzs": 0
+    }
+  }
+}

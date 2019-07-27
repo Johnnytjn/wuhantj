@@ -8,7 +8,12 @@ const arrayProps = [
   'overWeightPackage',
   'sensitivePhone',
   'sensitivePlace',
-  'firstAssociate'
+  'firstAssociate',
+  'sh_associate',
+  'zr_associate',
+  'criminal_record',
+  'home_area',
+  'active_region'
 ];
 
 export const getPropValue = (personData, name) => {

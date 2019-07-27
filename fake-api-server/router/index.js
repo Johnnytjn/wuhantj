@@ -17,4 +17,9 @@ module.exports = function(router) {
     const data = require('./fakedata/whoring/person.json');
     ctx.body = data;
   });
+  router.get('/fraud-info/:phoneNumber', async ctx => {
+    // const { phoneNumber } = ctx.params;
+    const data = require('./fakedata/fraud/data.json');
+    ctx.body = data;
+  });
 };
