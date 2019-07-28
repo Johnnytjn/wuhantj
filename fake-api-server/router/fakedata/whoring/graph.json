@@ -1,63 +1,25 @@
 {
   "relationships": {
-    "phone_num1": [
-      "phone_num2",
-      "phone_num3",
-      "phone_num4",
-      "cosmetic_phone_num1",
-      "cosmetic_phone_num2"
-    ],
-    "phone_num4": [
-      "phone_num5",
-      "phone_num6",
-      "cosmetic_phone_num1",
-      "cosmetic_phone_num2",
-      "cosmetic_phone_num3"
-    ]
+    "15549862737": ["15727158710", "18371500728"],
+    "15872355917": ["15549862737", "18271136183", "18372663853"],
+    "15972405911": ["18371500728", "18372663853"]
   },
   "person-data": {
-    "phone_num1": {
-      "name": "王二1",
-      "score": 56.66,
-      "type": "person"
+    "15549862737": { "name": "\u5b59\u60a6", "type": "person", "score": 99.2 },
+    "15727158710": {
+      "name": "\u4ee3\u7389\u82b9",
+      "type": "person",
+      "score": 99.8
     },
-    "phone_num2": {
-      "name": "王二2",
-      "score": 26.666,
-      "type": "person"
+    "18371500728": { "name": "\u8d56\u65b0", "type": "person", "score": 99.9 },
+    "15872355917": { "name": "\u8d56\u65b0", "type": "person", "score": 99.9 },
+    "18271136183": { "name": "\u5468\u6797", "type": "person", "score": 99.6 },
+    "18372663853": {
+      "name": "\u5f20\u6d77\u6885",
+      "type": "person",
+      "score": 99.9
     },
-    "phone_num3": {
-      "name": "王二3",
-      "score": 16.666,
-      "type": "person"
-    },
-    "phone_num4": {
-      "name": "王二4",
-      "score": 59.666,
-      "type": "person"
-    },
-    "phone_num5": {
-      "name": "王二5",
-      "score": 25.666,
-      "type": "person"
-    },
-    "phone_num6": {
-      "name": "王二6",
-      "score": 88.666,
-      "type": "person"
-    },
-    "cosmetic_phone_num1": {
-      "name": "机构甲",
-      "type": "cosmetic"
-    },
-    "cosmetic_phone_num2": {
-      "name": "机构乙",
-      "type": "cosmetic"
-    },
-    "cosmetic_phone_num3": {
-      "name": "机构丙",
-      "type": "cosmetic"
-    }
+    "15972405911": { "name": "\u5468\u6797", "type": "person", "score": 99.6 }
   },
-  "no-data": ["phone_num7", "phone_num8"]
+  "no_data": []
 }

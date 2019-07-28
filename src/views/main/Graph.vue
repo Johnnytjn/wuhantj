@@ -73,16 +73,18 @@ export default Vue.extend({
             roam: true,
             focusNodeAdjacency: true,
             force: {
-              repulsion: 200,
-              edgeLength: 300
+              // repulsion: 200,
+              // edgeLength: 300
+              repulsion: 60,
+              edgeLength: 500
             },
             label: {
               show: true,
               fontSize: 18,
               formatter: params => {
-                const { dataType, score, name, type } = params.data;
+                const { dataType, score, name, type, id } = params.data;
                 return dataType === "target" || type === "cosmetic"
-                  ? name
+                  ? `${name}\n(${id})`
                   : `${name}\n(${score}%)`;
               }
             }

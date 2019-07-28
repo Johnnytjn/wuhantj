@@ -1,0 +1,35 @@
+{
+  "personInfo": {
+    "sex": 1,
+    "homeAddress": "同济大学",
+    "culture": 0,
+    "photo": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559300925616&di=855031b1140cd0ac934dbaa9dd728a6b&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171030%2F26ed195281334ba4b1752394b60eb29a.jpeg",
+    "age": 20,
+    "predict": 98.0,
+    "name": "张三",
+    "marriage": 0,
+    "birthday": "1995-07-08",
+    "sfzh": "420221197207131220"
+  },
+  "linkInfo": {
+    "sh_keyword": 1,
+    "dk_message": 2,
+    "sh_message": 3,
+    "sh_contact": 4,
+    "zr_contact": 5,
+    "sh_associate": [{ "name": "张3", "sfzh": "421222199508272816" }],
+    "zr_associate": [{ "name": "整容院1", "phone": "号码4" }]
+  },
+  "trackInfo": {
+    "change_hotel_day": 10,
+    "change_hotel_time": 10,
+    "moving_long_distance": 10,
+    "moving_sum_distance": 2.19
+  },
+  "criminalRecord": {
+    "criminal_record": [
+      { "event_no": "00001", "event_name": "涉黄案件1", "event_type": "涉黄" },
+      { "event_no": "00002", "event_name": "涉黄案件2", "event_type": "涉黄" }
+    ]
+  }
+}

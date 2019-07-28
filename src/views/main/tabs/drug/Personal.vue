@@ -1,6 +1,6 @@
 <template>
   <div class="info-personal">
-    <img :src="getValue('photo')" height="200px" width="160px" />
+    <img :src="getValue('photo')" height="130px" width="100px" />
     <div style="flex-grow:2;margin-left:20px;">
       <div style="color:#fff;font-weight:800;">
         <span

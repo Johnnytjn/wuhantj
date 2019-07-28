@@ -1,35 +1,41 @@
 {
   "personInfo": {
-    "sex": 1,
-    "homeAddress": "同济大学",
+    "sfzh": "420607199811220821",
+    "predict": 99.2,
+    "name": "\u5b59\u60a6",
+    "photo": "",
+    "sex": 2,
+    "age": 21,
+    "birthday": "1998-11-22",
+    "marriage": 10,
     "culture": 0,
-    "photo": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559300925616&di=855031b1140cd0ac934dbaa9dd728a6b&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171030%2F26ed195281334ba4b1752394b60eb29a.jpeg",
-    "age": 20,
-    "predict": 98.0,
-    "name": "张三",
-    "marriage": 0,
-    "birthday": "1995-07-08",
-    "sfzh": "420221197207131220"
+    "homeAddress": "\u6e56\u5317\u7701\u8944\u6a0a\u5e02\u8944\u9633\u533a\n"
   },
   "linkInfo": {
-    "sh_keyword": 1,
-    "dk_message": 2,
-    "sh_message": 3,
-    "sh_contact": 4,
-    "zr_contact": 5,
-    "sh_associate": [{ "name": "张3", "sfzh": "421222199508272816" }],
-    "zr_associate": [{ "name": "整容院1", "phone": "号码4" }]
+    "sh_keyword": 0.0,
+    "dk_message": 11.0,
+    "sh_message": 0.0,
+    "sh_contact": 4.0,
+    "zr_contact": 0.0,
+    "sh_associate": [
+      { "name": "\u4ee3\u7389\u82b9", "sfzh": "421281198812134923" },
+      { "name": "\u8d56\u65b0", "sfzh": "441427198904190320" }
+    ],
+    "zr_associate": []
   },
   "trackInfo": {
-    "change_hotel_day": 10,
-    "change_hotel_time": 10,
-    "moving_long_distance": 10,
-    "moving_sum_distance": 2.19
+    "change_hotel_day": 0.0,
+    "change_hotel_time": 0.0,
+    "moving_long_distance": 19.0,
+    "moving_sum_distance": 1.7512057140000001
   },
   "criminalRecord": {
     "criminal_record": [
-      { "event_no": "00001", "event_name": "涉黄案件1", "event_type": "涉黄" },
-      { "event_no": "00002", "event_name": "涉黄案件2", "event_type": "涉黄" }
+      {
+        "event_no": "A4201067500002018125007",
+        "event_name": "\u5b59\u60a6\u5356\u6deb",
+        "event_type": "\u5356\u6deb"
+      }
     ]
   }
 }
