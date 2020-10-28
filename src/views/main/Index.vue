@@ -3,20 +3,31 @@
     <div class="drug-search">
       <search :onSearch="handleSearch" :type="type" />
     </div>
-    <div class="drug-content">
+    <div class="result">
+      <div class="general">
+        <div class="person-info">
+          <person :personData="personData" :type="type" />
+        </div>
+        <div class="person-graph">
+          <feature-graph :featureInfo="featureInfo" />
+        </div>
+      </div>
+      <div class="detail"><detail /></div>
+    </div>
+    <!-- <div class="drug-content">
       <div class="drug-graph">
         <graph
-          :graphData="graphData"
+          :featureInfo="featureInfo"
           :onPersonSelected="showPersonData"
           :type="type"
           v-if="type!=='fraud'"
         />
-        <feature-graph :graphData="graphData" v-if="type==='fraud'" />
+        <feature-graph :featureInfo="featureInfo" v-if="type==='fraud'" />
       </div>
       <div class="drug-person">
         <person-info :personData="personData" :type="type" />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -24,17 +35,21 @@
 import Vue from "vue";
 import Search from "./Search.vue";
 import Graph from "./Graph.vue";
-import FeatureGraph from "./graph/fraud/FeatureGraph.vue";
+// import FeatureGraph from "./graph/fraud/FeatureGraph.vue";
 import PersonInfo from "./PersonInfo.vue";
 import apiClient from "../../utils/api-client";
 
+import Detail from "./v2/Detail.vue";
+import Person from "./v2/Person.vue";
+import FeatureGraph from "./v2/FeatureGraph.vue";
+
 export default Vue.extend({
-  components: { PersonInfo, Search, Graph, FeatureGraph },
+  components: { PersonInfo, Search, Graph, FeatureGraph, Detail, Person },
   data() {
     return {
-      graphData: null,
+      featureInfo: null,
       personData: null,
-      type: this.$route.params.type || "drug"
+      type: this.$route.params.type || "drug",
     };
   },
   watch: {
@@ -45,31 +60,31 @@ export default Vue.extend({
       if (oldType !== newType) {
         this.type = newType;
         this.personData = null;
-        this.graphData = null;
+        this.featureInfo = null;
         this.$clearMessage();
         // console.log(">>>>> force");
         // this.$forceUpdate();
       }
     },
-    personData(data) {
-      const elem = document.getElementsByClassName("drug-person")[0] as any;
-      if (data) {
-        elem.style.borderLeft = "1px solid rgb(238, 241, 246)";
-      } else {
-        elem.style.borderLeft = "";
-      }
-    }
+    // personData(data) {
+    //   const elem = document.getElementsByClassName("drug-person")[0] as any;
+    //   if (data) {
+    //     elem.style.borderLeft = "1px solid rgb(238, 241, 246)";
+    //   } else {
+    //     elem.style.borderLeft = "";
+    //   }
+    // },
   },
   methods: {
     showPersonData(phoneNumber) {
       this.personData = null;
       const loading = this.$loading({
         fullscreen: false,
-        target: ".drug-person"
+        target: ".drug-person",
       });
       apiClient
         .getPersonData(this.type, phoneNumber)
-        .then(data => {
+        .then((data) => {
           this.personData = data;
         })
         .catch(() => {
@@ -81,56 +96,82 @@ export default Vue.extend({
         });
     },
     handleSearch(phoneNumbers) {
-      this.graphData = null;
+      this.featureInfo = null;
       const loading = this.$loading({
         fullscreen: false,
-        target: ".drug-graph"
+        target: ".drug-graph",
       });
 
-      if (this.type === "fraud") {
-        apiClient
-          .getFraudInfo(phoneNumbers[0])
-          .then(data => {
-            if (data["exist"] === 1) {
-              this.graphData = data.show_feature;
-              this.personData = data;
-            } else {
-              this.$error("该电话没有匹配数据");
+      // if (this.type === "fraud") {
+      apiClient
+        .search(this.type, phoneNumbers)
+        .then((data) => {
+          if (data["exist"] === 1) {
+            const { personInfo, featureInfo } = data;
+            if (personInfo) {
+              this.personData = personInfo;
             }
-          })
-          .catch(() => {
-            // console.error(error);
-            this.$error("搜索时系统出错！");
-          })
-          .finally(() => {
-            loading.close();
-          });
-      } else {
-        apiClient
-          .getGraph(this.type, phoneNumbers)
-          .then(data => {
-            this.graphData = data;
-            if (data && data.graph && data.graph.nodes && data.graph.nodes[0]) {
-              this.showPersonData(data.graph.nodes[0].id);
+            if (featureInfo) {
+              this.featureInfo = featureInfo;
             }
-            if (data && data["no-data"] && data["no-data"].length > 0) {
-              this.$error("以下电话没有匹配数据: " + data["no-data"].join(","));
-            }
-          })
-          .catch(() => {
-            // console.error(error);
-            this.$error("搜索时系统出错！");
-          })
-          .finally(() => {
-            loading.close();
-          });
-      }
-    }
-  } as any
+          } else {
+            this.$error("该电话没有匹配数据");
+          }
+        })
+        .catch(() => {
+          // console.error(error);
+          this.$error("搜索时系统出错！");
+        })
+        .finally(() => {
+          loading.close();
+        });
+      // } else {
+      //   // apiClient
+      //   //   .search(this.type, phoneNumbers)
+      //   //   .then((data) => {
+      //   //     const { personInfo, featureInfo } = data;
+      //   //     if (personInfo) {
+      //   //       this.personData = personInfo;
+      //   //     }
+      //   //     if (featureInfo) {
+      //   //       this.featureInfo = featureInfo;
+      //   //     }
+      //   //     if (data && data["no-data"] && data["no-data"].length > 0) {
+      //   //       this.$error("以下电话没有匹配数据: " + data["no-data"].join(","));
+      //   //     }
+      //   //   })
+      //   //   .catch(() => {
+      //   //     // console.error(error);
+      //   //     this.$error("搜索时系统出错！");
+      //   //   })
+      //   //   .finally(() => {
+      //   //     loading.close();
+      //   //   });
+      //   // apiClient
+      //   //   .getGraph(this.type, phoneNumbers)
+      //   //   .then((data) => {
+      //   //     this.featureInfo = data;
+      //   //     if (data && data.graph && data.graph.nodes && data.graph.nodes[0]) {
+      //   //       this.showPersonData(data.graph.nodes[0].id);
+      //   //     }
+      //   //     if (data && data["no-data"] && data["no-data"].length > 0) {
+      //   //       this.$error("以下电话没有匹配数据: " + data["no-data"].join(","));
+      //   //     }
+      //   //   })
+      //   //   .catch(() => {
+      //   //     // console.error(error);
+      //   //     this.$error("搜索时系统出错！");
+      //   //   })
+      //   //   .finally(() => {
+      //   //     loading.close();
+      //   //   });
+      // }
+    },
+  } as any,
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .drug-main {
   display: flex;
   flex-direction: column;
@@ -161,6 +202,31 @@ export default Vue.extend({
 .drug-person {
   width: 30%;
   overflow-y: auto;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+}
+
+.general {
+  display: flex;
+  height: 250px;
+
+  .person-info {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding: 20px;
+    width: 30%;
+  }
+
+  .person-graph {
+    flex-grow: 2;
+  }
+}
+
+.detail {
 }
 </style>
 

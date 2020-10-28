@@ -1,14 +1,15 @@
 <template>
   <div class="container">
     <!-- drug and whoring  -->
-    <div class="tag-container" v-if="type==='drug'||type==='whoring'">
+    <!-- <div class="tag-container" v-if="type === 'drug' || type === 'whoring'">
       <el-tag
         :key="tag"
         v-for="tag in dynamicTags"
         closable
         :disable-transitions="false"
         @close="handleClose(tag)"
-      >{{tag}}</el-tag>
+        >{{ tag }}</el-tag
+      >
       <el-input
         type="text"
         maxlength="11"
@@ -22,12 +23,19 @@
         placeholder="请输入目标人员电话并回车"
       ></el-input>
     </div>
-    <div class="button-container" v-if="type==='drug'||type==='whoring'">
-      <el-button type="primary" @click="submit" :disabled="dynamicTags.length===0">搜索</el-button>
-      <el-button @click="reset" :disabled="dynamicTags.length===0">清空</el-button>
-    </div>
+    <div class="button-container" v-if="type === 'drug' || type === 'whoring'">
+      <el-button
+        type="primary"
+        @click="submit"
+        :disabled="dynamicTags.length === 0"
+        >搜索</el-button
+      >
+      <el-button @click="reset" :disabled="dynamicTags.length === 0"
+        >清空</el-button
+      >
+    </div> -->
     <!-- fraud  -->
-    <div class="tag-container" v-if="type==='fraud'">
+    <div class="tag-container">
       <el-input
         type="text"
         maxlength="11"
@@ -36,13 +44,22 @@
         v-model="inputValue"
         ref="saveTagInput"
         size="mini"
-        placeholder="请输入嫌疑电话"
+        :placeholder="
+          type === 'fraud' ? '请输入嫌疑电话' : '请输入目标人员电话'
+        "
         @keyup.enter.native="submitFraud"
       ></el-input>
     </div>
-    <div class="button-container" v-if="type==='fraud'">
-      <el-button type="primary" @click="submitFraud" :disabled="testFraudInput()">搜索</el-button>
-      <el-button @click="resetFraud" :disabled="inputValue===''">清空</el-button>
+    <div class="button-container">
+      <el-button
+        type="primary"
+        @click="submitFraud"
+        :disabled="testFraudInput()"
+        >搜索</el-button
+      >
+      <el-button @click="resetFraud" :disabled="inputValue === ''"
+        >清空</el-button
+      >
     </div>
   </div>
 </template>
@@ -53,12 +70,12 @@ import Vue from "vue";
 export default Vue.extend({
   props: {
     onSearch: Function,
-    type: String
+    type: String,
   },
   data() {
     return {
       dynamicTags: new Array(),
-      inputValue: ""
+      inputValue: "",
     };
   },
   watch: {
@@ -67,7 +84,7 @@ export default Vue.extend({
         this.reset();
         this.inputValue = "";
       }
-    }
+    },
   },
   methods: {
     submit() {
@@ -106,8 +123,8 @@ export default Vue.extend({
       } else {
         this.onSearch([this.inputValue]);
       }
-    }
-  } as any
+    },
+  } as any,
 });
 </script>
 

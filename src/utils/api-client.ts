@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
 const BaseURL = {
-  drug: '/api/drug-related-pers',
-  whoring: '/api/whoring-related-pers',
-  fraud: '/api/fraud-info'
+  drug: "/api/drug",
+  whoring: "/api/whoring",
+  fraud: "/api/fraud"
 };
 
 axios.interceptors.response.use(
@@ -13,9 +13,9 @@ axios.interceptors.response.use(
   function(error) {
     const status = error.response.status;
     if (401 === status) {
-      window.location.href = '/api/login';
+      window.location.href = "/api/login";
     } else if (403 === status) {
-      window.location.href = '/error/403';
+      window.location.href = "/error/403";
     } else {
       return Promise.reject(error);
     }
@@ -25,11 +25,11 @@ axios.interceptors.response.use(
 class APIClient {
   private invoke({
     url,
-    method = 'get',
+    method = "get",
     data = undefined
   }: {
     url: string;
-    method?: 'get' | 'post' | 'put' | 'delete';
+    method?: "get" | "post" | "put" | "delete";
     data?: object;
     env?: string;
   }) {
@@ -38,30 +38,39 @@ class APIClient {
       url
     };
     if (data) {
-      config['data'] = data;
+      config["data"] = data;
     }
-    console.log('axios config:', config);
+    console.log("axios config:", config);
 
     return axios(config).then(res => res.data);
   }
 
   getGraph(type, phoneNumbers: string[]) {
     return this.invoke({
-      url: BaseURL[type] + '/graph',
-      method: 'post',
+      url: BaseURL[type] + "/graph",
+      method: "post",
       data: { phoneNumbers }
     });
   }
 
   getPersonData(type, phoneNumber: string) {
     return this.invoke({
-      url: BaseURL[type] + '/' + phoneNumber
+      url: BaseURL[type] + "/" + phoneNumber
     });
   }
 
   getFraudInfo(phoneNumber: string) {
     return this.invoke({
-      url: BaseURL['fraud'] + '/' + phoneNumber
+      url: BaseURL["fraud"] + "/" + phoneNumber
+    });
+  }
+
+  // v2
+  search(type, phoneNumbers: string[]) {
+    return this.invoke({
+      url: BaseURL[type] + "/search",
+      method: "post",
+      data: { phoneNumbers }
     });
   }
 }

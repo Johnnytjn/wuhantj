@@ -1,0 +1,16 @@
+{
+  "personInfo": {
+    "homeArea": "北京",
+    "activeRegion": [
+      { "code": 43703, "region": "黄陂彭家冲村EG1-3" },
+      { "code": 31532, "region": "孝昌大新村ZG1-2" }
+    ]
+  },
+  "featureInfo": {
+    "featureNum": 3,
+    "featureName": ["异常开关机", "一机多卡", "敏感地通联"],
+    "featureScore": [0.2, 0.1, 0.7],
+    "predict": 99.7
+  },
+  "exist": 1
+}
