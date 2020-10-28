@@ -51,9 +51,17 @@ module.exports = function(router) {
     const { phoneNumbers } = ctx.request.body;
     ctx.body = await dragAPI.search(phoneNumbers);
   });
+  router.post("/drug/graph", async ctx => {
+    const { phoneNumbers } = ctx.request.body;
+    ctx.body = await dragAPI.graph(phoneNumbers);
+  });
   router.post("/whoring/search", async ctx => {
     const { phoneNumbers } = ctx.request.body;
     ctx.body = await whoringAPI.search(phoneNumbers);
+  });
+  router.post("/whoring/graph", async ctx => {
+    const { phoneNumbers } = ctx.request.body;
+    ctx.body = await whoringAPI.graph(phoneNumbers);
   });
   router.post("/fraud/search", async ctx => {
     const { phoneNumbers } = ctx.request.body;

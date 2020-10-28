@@ -12,7 +12,9 @@
           <feature-graph :featureInfo="featureInfo" />
         </div>
       </div>
-      <div class="detail"><detail /></div>
+      <div class="detail" v-if="!!graphData">
+        <detail :graphData="graphData" :type="type" />
+      </div>
     </div>
     <!-- <div class="drug-content">
       <div class="drug-graph">
@@ -34,9 +36,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Search from "./Search.vue";
-import Graph from "./Graph.vue";
 // import FeatureGraph from "./graph/fraud/FeatureGraph.vue";
-import PersonInfo from "./PersonInfo.vue";
 import apiClient from "../../utils/api-client";
 
 import Detail from "./v2/Detail.vue";
@@ -44,11 +44,17 @@ import Person from "./v2/Person.vue";
 import FeatureGraph from "./v2/FeatureGraph.vue";
 
 export default Vue.extend({
-  components: { PersonInfo, Search, Graph, FeatureGraph, Detail, Person },
+  components: {
+    Search,
+    FeatureGraph,
+    Detail,
+    Person,
+  },
   data() {
     return {
       featureInfo: null,
       personData: null,
+      graphData: null,
       type: this.$route.params.type || "drug",
     };
   },
@@ -61,6 +67,7 @@ export default Vue.extend({
         this.type = newType;
         this.personData = null;
         this.featureInfo = null;
+        this.graphData = null;
         this.$clearMessage();
         // console.log(">>>>> force");
         // this.$forceUpdate();
@@ -113,6 +120,14 @@ export default Vue.extend({
             }
             if (featureInfo) {
               this.featureInfo = featureInfo;
+            }
+
+            if (this.type !== "fraud") {
+              apiClient.getGraph(this.type, phoneNumbers).then((data) => {
+                this.graphData = data;
+              });
+            } else {
+              this.graphData = data;
             }
           } else {
             this.$error("该电话没有匹配数据");
@@ -227,6 +242,7 @@ export default Vue.extend({
 }
 
 .detail {
+  flex-grow: 2;
 }
 </style>
 

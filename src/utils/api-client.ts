@@ -45,13 +45,13 @@ class APIClient {
     return axios(config).then(res => res.data);
   }
 
-  getGraph(type, phoneNumbers: string[]) {
-    return this.invoke({
-      url: BaseURL[type] + "/graph",
-      method: "post",
-      data: { phoneNumbers }
-    });
-  }
+  // getGraph(type, phoneNumbers: string[]) {
+  //   return this.invoke({
+  //     url: BaseURL[type] + "/graph",
+  //     method: "post",
+  //     data: { phoneNumbers }
+  //   });
+  // }
 
   getPersonData(type, phoneNumber: string) {
     return this.invoke({
@@ -69,6 +69,13 @@ class APIClient {
   search(type, phoneNumbers: string[]) {
     return this.invoke({
       url: BaseURL[type] + "/search",
+      method: "post",
+      data: { phoneNumbers }
+    });
+  }
+  getGraph(type, phoneNumbers: string[]) {
+    return this.invoke({
+      url: BaseURL[type] + "/graph",
       method: "post",
       data: { phoneNumbers }
     });

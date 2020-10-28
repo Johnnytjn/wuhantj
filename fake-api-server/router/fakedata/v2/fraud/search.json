@@ -1,4 +1,62 @@
 {
+  "show_feature": {
+    "msg": {
+      "query": 10,
+      "bank": 20,
+      "other": 30
+    },
+    "call": {
+      "zj": 10,
+      "bj": 20,
+      "bjwd": 30,
+      "bjbd": 40
+    },
+    "time": ["2:00-4:00", "14:00-16:00"],
+    "home_area": [
+      {
+        "num": 3,
+        "city_name": "广州市"
+      },
+      {
+        "num": 3,
+        "city_name": "北京市"
+      }
+    ]
+  },
+  "basic-info": {
+    "home_area": "北京市",
+    "score": 99.7,
+    "active_region": [
+      {
+        "CI": 57332,
+        "address": "赤壁"
+      },
+      {
+        "CI": 58822,
+        "address": "巴东县"
+      }
+    ]
+  },
+  "link_info": {
+    "sms": {
+      "query_num": 1,
+      "query_freq": 0.5,
+      "bank_num": 1,
+      "bank_freq": 0.5
+    },
+    "call": {
+      "bj": 1,
+      "zj": 1,
+      "bjwd": 1,
+      "query_num": 1,
+      "query_freq": 0.5,
+      "zj_aver": 2.5,
+      "bj_aver": 2.5
+    },
+    "event": {
+      "sjzs": 1
+    }
+  },
   "personInfo": {
     "homeArea": "北京",
     "activeRegion": [

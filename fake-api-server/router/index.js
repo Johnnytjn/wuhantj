@@ -27,8 +27,14 @@ module.exports = function(router) {
   router.post("/drug/search", async ctx => {
     ctx.body = require("./fakedata/v2/drug/search.json");
   });
+  router.post("/drug/graph", async ctx => {
+    ctx.body = require("./fakedata/v2/drug/graph.json");
+  });
   router.post("/whoring/search", async ctx => {
     ctx.body = require("./fakedata/v2/whoring/search.json");
+  });
+  router.post("/whoring/graph", async ctx => {
+    ctx.body = require("./fakedata/v2/whoring/graph.json");
   });
   router.post("/fraud/search", async ctx => {
     ctx.body = require("./fakedata/v2/fraud/search.json");

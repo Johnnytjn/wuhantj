@@ -1,0 +1,33 @@
+{
+  "relationships": {
+    "phone_num1": ["phone_num2", "phone_num3", "phone_num4"],
+    "phone_num4": ["phone_num5", "phone_num6"]
+  },
+  "person-data": {
+    "phone_num1": {
+      "name": "李四1",
+      "score": 56.66
+    },
+    "phone_num2": {
+      "name": "李四2",
+      "score": 26.666
+    },
+    "phone_num3": {
+      "name": "李四3",
+      "score": 16.666
+    },
+    "phone_num4": {
+      "name": "李四4",
+      "score": 59.666
+    },
+    "phone_num5": {
+      "name": "李四5",
+      "score": 25.666
+    },
+    "phone_num6": {
+      "name": "李四6",
+      "score": 88.666
+    }
+  },
+  "no-data": ["phone_num7", "phone_num8"]
+}
