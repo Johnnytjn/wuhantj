@@ -40,11 +40,10 @@ export default Vue.extend({
   },
   watch: {
     graphData(newData, oldData) {
-      console.log(">>>>>>>>new graph data:", newData, oldData);
-      // if (!newData && this.chart) {
-      //   this.chart.clear();
-      //   return;
-      // }
+      if (!newData && this.chart) {
+        this.chart.clear();
+        return;
+      }
 
       if (oldData === null && newData) {
         // init
@@ -109,23 +108,27 @@ export default Vue.extend({
           this.chart.resize({ width, height });
         });
       } else if (oldData && newData) {
-        console.log(">>>>>>> going to update chart", newData);
-
+        // update
         const updatedOptionData = Object.assign({}, this.chart.getOption());
+        const series0 = updatedOptionData.series[0];
         // const updatedOptionData = { series: [{ data: [], links: [] }] };
         newData.nodes.forEach((node) => {
           const { id, name, dataType, score, category } = node;
-          updatedOptionData.series[0].data.push(
-            buildGraphNode({ id, name, dataType, score, category })
-          );
+          if (!series0.data.find((x) => x.id === id)) {
+            series0.data.push(
+              buildGraphNode({ id, name, dataType, score, category })
+            );
+          }
         });
         newData.links.forEach(({ source, target }) => {
-          updatedOptionData.series[0].links.push(
-            buildGraphLink({ source, target })
-          );
+          if (
+            !series0.links.find(
+              (x) => x.source === source && x.target === target
+            )
+          ) {
+            series0.links.push(buildGraphLink({ source, target }));
+          }
         });
-        // update
-        console.log(">>>>>>>new option:", updatedOptionData);
         this.chart.setOption(updatedOptionData);
       }
     },
