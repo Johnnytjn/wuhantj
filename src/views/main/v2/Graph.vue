@@ -130,6 +130,7 @@ export default Vue.extend({
           }
         });
         this.chart.setOption(updatedOptionData);
+        document.querySelector(".el-main").scrollTop = newData.scrollTop;
       }
     },
   },
@@ -141,9 +142,9 @@ export default Vue.extend({
       // { renderer: "svg" }
     );
     this.chart.on("click", function (params) {
-      console.log("############", params);
-      const { id: phoneNumber, type } = params.data;
-      that.onPersonSelected(params.data, true);
+      const scrollTop = document.querySelector(".el-main").scrollTop;
+      const { id, category } = params.data;
+      that.onPersonSelected({ id, category, scrollTop }, true);
     });
     window.onresize = this.chart.resize;
   },
