@@ -228,43 +228,43 @@ export default Vue.extend({
 .result {
   display: flex;
   flex-direction: column;
-}
 
-.general {
-  display: flex;
-  height: 250px;
-  border-bottom: 1px solid rgb(238, 241, 246);
-
-  .person-info {
+  .general {
     display: flex;
-    align-items: center;
-    text-align: left;
-    padding: 20px;
-    width: 30%;
-  }
+    height: 250px;
+    border-bottom: 1px solid rgb(238, 241, 246);
 
-  .person-graph {
-    flex-grow: 2;
-  }
-}
-
-.detail {
-  flex-grow: 2;
-  padding-left: 24px;
-  padding-right: 24px;
-
-  .groupanalysis {
-    height: 600px;
-    width: 100%;
-    display: flex;
-
-    .groupanalysis-graph {
-      height: 100%;
-      width: 70%;
-    }
-    .groupanalysis-person {
+    .person-info {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      padding: 20px;
       width: 30%;
-      overflow-y: auto;
+    }
+
+    .person-graph {
+      flex-grow: 2;
+    }
+  }
+
+  .detail {
+    flex-grow: 2;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    .groupanalysis {
+      height: 600px;
+      width: 100%;
+      display: flex;
+
+      .groupanalysis-graph {
+        height: 100%;
+        width: 70%;
+      }
+      .groupanalysis-person {
+        width: 30%;
+        overflow-y: auto;
+      }
     }
   }
 }

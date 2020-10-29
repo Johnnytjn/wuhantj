@@ -61,6 +61,7 @@ export default Vue.extend({
             data: nodeData,
             links: linkData,
             roam: true,
+            nodeScaleRatio: 0,
             // focusNodeAdjacency: true,
             force: {
               // repulsion: 200,

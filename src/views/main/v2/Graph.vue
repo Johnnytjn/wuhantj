@@ -66,12 +66,14 @@ export default Vue.extend({
           {
             name: "涉毒关系人",
             type: "graph",
-            layout: "force",
+            // layout: "force",
+            layout: "circular",
             data: nodeData,
             links: linkData,
             categories: categories,
             roam: true,
             focusNodeAdjacency: true,
+            nodeScaleRatio: 0,
             force: {
               // repulsion: 200,
               // edgeLength: 300
@@ -93,6 +95,12 @@ export default Vue.extend({
       };
       this.chart.clear();
       this.chart.setOption(optionData);
+      setTimeout(() => {
+        const { width, height } = document
+          .querySelector(".groupanalysis-graph")
+          .getBoundingClientRect();
+        this.chart.resize({ width, height });
+      });
     },
   },
   mounted() {
@@ -109,9 +117,6 @@ export default Vue.extend({
       }
     });
     window.onresize = this.chart.resize;
-    setTimeout(() => {
-      this.chart.resize();
-    }, 500);
   },
 }) as any;
 </script>
