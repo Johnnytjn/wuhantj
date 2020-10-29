@@ -123,19 +123,41 @@ export default Vue.extend({
     },
   },
   methods: {
-    showPersonData(phoneNumber) {
+    showPersonData(selectedPerson, needUpdateGraph) {
+      console.log("$$$$selectedPerson:", selectedPerson);
+      const { id: phoneNumber, category } = selectedPerson;
       this.graphHumanData = null;
       const loading = this.$loading({
         fullscreen: false,
         target: ".drug-person",
       });
+      const that = this;
       apiClient
         .getPersonData(this.type, phoneNumber)
         .then((data) => {
           this.graphHumanData = data;
+          if (needUpdateGraph) {
+            const personData = data["person_data"];
+            const updatedGraphData = { nodes: [], links: [] };
+            Object.entries(personData).forEach(([phoneNum, person]) => {
+              const { name, score } = person;
+              updatedGraphData.nodes.push({
+                id: phoneNum,
+                dataType: "contact",
+                name,
+                score,
+                category,
+              });
+              updatedGraphData.links.push({
+                source: phoneNumber,
+                target: phoneNum,
+              });
+            });
+            that.graphData = updatedGraphData;
+          }
         })
-        .catch(() => {
-          // console.error(error);
+        .catch((err) => {
+          console.error(err);
           this.$error("加载个人信息时系统出错！");
         })
         .finally(() => {
@@ -154,7 +176,7 @@ export default Vue.extend({
         .then((data) => {
           if (data["exist"] === 1) {
             if (this.type !== "fraud") {
-              this.showPersonData(phoneNumbers[0]);
+              this.showPersonData({ id: phoneNumbers[0] });
 
               const { personInfo, featureInfo } = data;
 

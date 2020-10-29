@@ -20,8 +20,6 @@ export default Vue.extend({
   },
   watch: {
     personData(newData, oldData) {
-      console.log(">>>>>>personData:", newData, oldData);
-
       const elem = document.querySelector("#person-info") as any;
       if (newData && elem) {
         elem.style.opacity = "1";

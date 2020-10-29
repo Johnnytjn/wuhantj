@@ -2,14 +2,14 @@
   "person_data": {
     "号码4": {
       "type": "person",
-      "name": "王5",
+      "name": "整容院2",
       "score": 93.0,
       "description": "同车"
     },
     "号码5": {
       "type": "cosmetic",
       "name": "整容院1",
-      "score": 0.0,
+      "score": 88,
       "description": "通联"
     }
   },

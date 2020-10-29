@@ -34,8 +34,6 @@ export default Vue.extend({
   },
   watch: {
     graphData(newData) {
-      console.log(">>>>>>fraud feature graph:", newData);
-
       if (!newData) {
         // if (this.homeareaGraph) {
         //   this.homeareaGraph.clear();
