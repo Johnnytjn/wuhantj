@@ -12,7 +12,7 @@
           <feature-graph :featureInfo="featureInfo" />
         </div>
       </div>
-      <div class="detail" v-if="!!graphData">
+      <div class="detail">
         <fraud-graph
           :graphData="graphData"
           :type="type"
