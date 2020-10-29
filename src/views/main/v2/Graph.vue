@@ -112,6 +112,7 @@ export default Vue.extend({
         console.log(">>>>>>> going to update chart", newData);
 
         const updatedOptionData = Object.assign({}, this.chart.getOption());
+        // const updatedOptionData = { series: [{ data: [], links: [] }] };
         newData.nodes.forEach((node) => {
           const { id, name, dataType, score, category } = node;
           updatedOptionData.series[0].data.push(
@@ -125,7 +126,7 @@ export default Vue.extend({
         });
         // update
         console.log(">>>>>>>new option:", updatedOptionData);
-        this.chart.setOption(updatedOptionData, false);
+        this.chart.setOption(updatedOptionData);
       }
     },
   },
@@ -133,8 +134,8 @@ export default Vue.extend({
     const that = this;
     this.chart = echarts.init(
       document.getElementById("relatedPerGraph"),
-      null,
-      { renderer: "svg" }
+      null
+      // { renderer: "svg" }
     );
     this.chart.on("click", function (params) {
       console.log("############", params);
