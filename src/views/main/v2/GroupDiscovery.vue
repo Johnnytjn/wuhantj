@@ -55,14 +55,13 @@ export default Vue.extend({
 </script>
 <style lang="scss" scoped>
 .main {
-  height: 400px;
+  height: 600px;
   width: 100%;
-
   display: flex;
 
   .graph {
-    flex-grow: 2;
-    height: 400px;
+    height: 100%;
+    width: 70%;
   }
   .person {
     width: 30%;

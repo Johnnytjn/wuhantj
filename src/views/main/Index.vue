@@ -16,9 +16,9 @@
         <fraud-graph
           :graphData="graphData"
           :type="type"
-          v-if="type === 'fraud'"
+          v-show="type === 'fraud'"
         />
-        <el-tabs tab-position="left" v-if="type !== 'fraud'">
+        <el-tabs tab-position="left" v-show="type !== 'fraud' && personData">
           <el-tab-pane label="群体发现"
             ><group-discovery :graphData="graphData" :type="type"
           /></el-tab-pane>
@@ -268,6 +268,8 @@ export default Vue.extend({
 
 .detail {
   flex-grow: 2;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 </style>
 

@@ -109,6 +109,9 @@ export default Vue.extend({
       }
     });
     window.onresize = this.chart.resize;
+    setTimeout(() => {
+      this.chart.resize();
+    }, 500);
   },
 }) as any;
 </script>
@@ -123,8 +126,8 @@ export default Vue.extend({
 }
 
 #relatedPerGraph {
-  width: 500px;
-  height: 400px;
+  height: 100%;
+  width: 100%;
 }
 </style>
 

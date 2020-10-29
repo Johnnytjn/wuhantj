@@ -20,7 +20,6 @@ export default Vue.extend({
   },
   watch: {
     trackData(data) {
-      console.log(">>>>>", data);
       const { trackingPoints, clusters } = data;
       trackingPoints.forEach((x) => {
         this.addPoint(x.long, x.lat);
@@ -28,6 +27,16 @@ export default Vue.extend({
       clusters.forEach((x) => {
         this.addCircle(x.center.long, x.center.lat);
       });
+
+      const firstTrackingPoint =
+        trackingPoints && trackingPoints.length > 0 && trackingPoints[0];
+      if (firstTrackingPoint) {
+        const point = new BMap.Point(
+          firstTrackingPoint.long,
+          firstTrackingPoint.lat
+        );
+        this.map.centerAndZoom(point, 6);
+      }
     },
   },
   methods: {
@@ -79,10 +88,6 @@ export default Vue.extend({
       this.map.addTileLayer(tileLayer);
       this.map.enableScrollWheelZoom(true);
       this.map.addControl(new BMap.NavigationControl());
-      setTimeout(() => {
-        let point = new BMap.Point(116.404, 39.915);
-        this.map.centerAndZoom(point, 6);
-      }, 500);
     },
   },
 });
@@ -96,7 +101,7 @@ export default Vue.extend({
 }
 /* 地图 */
 .baiduMap {
-  width: 90%;
+  width: 95%;
   height: 600px;
 }
 /* 去除地图上，左下字体标注 */
