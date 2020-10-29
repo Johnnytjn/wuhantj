@@ -22,6 +22,9 @@
           tab-position="left"
           v-show="type !== 'fraud' && graphHumanData"
         >
+          <el-tab-pane label="轨迹分析"
+            ><track-map :trackData="trackData"
+          /></el-tab-pane>
           <el-tab-pane label="群体发现">
             <div class="groupanalysis">
               <div class="groupanalysis-graph">
@@ -37,9 +40,6 @@
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="轨迹分析"
-            ><track-map :trackData="trackData"
-          /></el-tab-pane>
         </el-tabs>
       </div>
     </div>
