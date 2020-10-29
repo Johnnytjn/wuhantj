@@ -18,10 +18,25 @@
           :type="type"
           v-show="type === 'fraud'"
         />
-        <el-tabs tab-position="left" v-show="type !== 'fraud' && personData">
-          <el-tab-pane label="群体发现"
-            ><group-discovery :graphData="graphData" :type="type"
-          /></el-tab-pane>
+        <el-tabs
+          tab-position="left"
+          v-show="type !== 'fraud' && graphHumanData"
+        >
+          <el-tab-pane label="群体发现">
+            <div class="groupanalysis">
+              <div class="groupanalysis-graph">
+                <graph
+                  :graphData="graphData"
+                  :onPersonSelected="showPersonData"
+                  :type="type"
+                  v-show="type !== 'fraud'"
+                />
+              </div>
+              <div class="groupanalysis-person">
+                <person-info :personData="graphHumanData" :type="type" />
+              </div>
+            </div>
+          </el-tab-pane>
           <el-tab-pane label="轨迹分析"
             ><track-map :trackData="trackData"
           /></el-tab-pane>
@@ -56,8 +71,9 @@ import Person from "./v2/Person.vue";
 import FeatureGraph from "./v2/FeatureGraph.vue";
 
 import TrackMap from "./v2/TrackMap.vue";
-import GroupDiscovery from "./v2/GroupDiscovery.vue";
 import FraudGraph from "./v2/FraudGraph.vue";
+import Graph from "./v2/Graph.vue";
+import PersonInfo from "./v2/PersonInfo.vue";
 
 export default Vue.extend({
   components: {
@@ -65,13 +81,15 @@ export default Vue.extend({
     FeatureGraph,
     Person,
     TrackMap,
-    GroupDiscovery,
     FraudGraph,
+    Graph,
+    PersonInfo,
   },
   data() {
     return {
       trackData: null,
       featureInfo: null,
+      graphHumanData: null,
       personData: null,
       graphData: null,
       type: this.$route.params.type || "drug",
@@ -85,6 +103,7 @@ export default Vue.extend({
       if (oldType !== newType) {
         this.type = newType;
         this.personData = null;
+        this.graphHumanData = null;
         this.featureInfo = null;
         this.graphData = null;
         this.$clearMessage();
@@ -92,18 +111,20 @@ export default Vue.extend({
         // this.$forceUpdate();
       }
     },
-    // personData(data) {
-    //   const elem = document.getElementsByClassName("drug-person")[0] as any;
-    //   if (data) {
-    //     elem.style.borderLeft = "1px solid rgb(238, 241, 246)";
-    //   } else {
-    //     elem.style.borderLeft = "";
-    //   }
-    // },
+    graphHumanData(data) {
+      const elem = document.getElementsByClassName(
+        "groupanalysis-person"
+      )[0] as any;
+      if (data) {
+        elem.style.borderLeft = "1px solid rgb(238, 241, 246)";
+      } else {
+        elem.style.borderLeft = "";
+      }
+    },
   },
   methods: {
     showPersonData(phoneNumber) {
-      this.personData = null;
+      this.graphHumanData = null;
       const loading = this.$loading({
         fullscreen: false,
         target: ".drug-person",
@@ -111,7 +132,7 @@ export default Vue.extend({
       apiClient
         .getPersonData(this.type, phoneNumber)
         .then((data) => {
-          this.personData = data;
+          this.graphHumanData = data;
         })
         .catch(() => {
           // console.error(error);
@@ -128,12 +149,13 @@ export default Vue.extend({
         target: ".drug-graph",
       });
 
-      // if (this.type === "fraud") {
       apiClient
         .search(this.type, phoneNumbers)
         .then((data) => {
           if (data["exist"] === 1) {
             if (this.type !== "fraud") {
+              this.showPersonData(phoneNumbers[0]);
+
               const { personInfo, featureInfo } = data;
 
               if (personInfo) {
@@ -165,47 +187,6 @@ export default Vue.extend({
         .finally(() => {
           loading.close();
         });
-      // } else {
-      //   // apiClient
-      //   //   .search(this.type, phoneNumbers)
-      //   //   .then((data) => {
-      //   //     const { personInfo, featureInfo } = data;
-      //   //     if (personInfo) {
-      //   //       this.personData = personInfo;
-      //   //     }
-      //   //     if (featureInfo) {
-      //   //       this.featureInfo = featureInfo;
-      //   //     }
-      //   //     if (data && data["no-data"] && data["no-data"].length > 0) {
-      //   //       this.$error("以下电话没有匹配数据: " + data["no-data"].join(","));
-      //   //     }
-      //   //   })
-      //   //   .catch(() => {
-      //   //     // console.error(error);
-      //   //     this.$error("搜索时系统出错！");
-      //   //   })
-      //   //   .finally(() => {
-      //   //     loading.close();
-      //   //   });
-      //   // apiClient
-      //   //   .getGraph(this.type, phoneNumbers)
-      //   //   .then((data) => {
-      //   //     this.featureInfo = data;
-      //   //     if (data && data.graph && data.graph.nodes && data.graph.nodes[0]) {
-      //   //       this.showPersonData(data.graph.nodes[0].id);
-      //   //     }
-      //   //     if (data && data["no-data"] && data["no-data"].length > 0) {
-      //   //       this.$error("以下电话没有匹配数据: " + data["no-data"].join(","));
-      //   //     }
-      //   //   })
-      //   //   .catch(() => {
-      //   //     // console.error(error);
-      //   //     this.$error("搜索时系统出错！");
-      //   //   })
-      //   //   .finally(() => {
-      //   //     loading.close();
-      //   //   });
-      // }
     },
   } as any,
 });
@@ -252,6 +233,7 @@ export default Vue.extend({
 .general {
   display: flex;
   height: 250px;
+  border-bottom: 1px solid rgb(238, 241, 246);
 
   .person-info {
     display: flex;
@@ -270,6 +252,21 @@ export default Vue.extend({
   flex-grow: 2;
   padding-left: 24px;
   padding-right: 24px;
+
+  .groupanalysis {
+    height: 600px;
+    width: 100%;
+    display: flex;
+
+    .groupanalysis-graph {
+      height: 100%;
+      width: 70%;
+    }
+    .groupanalysis-person {
+      width: 30%;
+      overflow-y: auto;
+    }
+  }
 }
 </style>
 

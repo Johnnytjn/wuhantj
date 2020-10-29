@@ -1,5 +1,5 @@
 <template>
-  <div class="info-personal" id="person-container">
+  <div class="info-personal" id="person-info">
     <general-person :personData="personData" v-if="type !== 'fraud'" />
     <fraud-person :personData="personData" v-if="type === 'fraud'" />
   </div>
@@ -19,9 +19,11 @@ export default Vue.extend({
     type: String,
   },
   watch: {
-    personData(data) {
-      const elem = document.querySelector("#person-container") as any;
-      if (data && elem) {
+    personData(newData, oldData) {
+      console.log(">>>>>>personData:", newData, oldData);
+
+      const elem = document.querySelector("#person-info") as any;
+      if (newData && elem) {
         elem.style.opacity = "1";
       } else {
         elem!.style.opacity = "0";
@@ -41,7 +43,7 @@ export default Vue.extend({
   display: flex;
 }
 
-#person-container {
+#person-info {
   transition: all 0.5s;
   opacity: 0;
   width: 100%;
