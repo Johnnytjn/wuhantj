@@ -17,6 +17,7 @@
 import Vue from "vue";
 import Graph from "./Graph.vue";
 import PersonInfo from "./PersonInfo.vue";
+import apiClient from "../../../utils/api-client";
 
 export default Vue.extend({
   components: { Graph, PersonInfo },
@@ -24,15 +25,48 @@ export default Vue.extend({
     graphData: Object,
     type: String,
   },
+  data() {
+    return {
+      personData: null,
+    };
+  },
+  methods: {
+    showPersonData(phoneNumber) {
+      this.personData = null;
+      const loading = this.$loading({
+        fullscreen: false,
+        target: ".drug-person",
+      });
+      apiClient
+        .getPersonData(this.type, phoneNumber)
+        .then((data) => {
+          this.personData = data;
+        })
+        .catch(() => {
+          // console.error(error);
+          this.$error("加载个人信息时系统出错！");
+        })
+        .finally(() => {
+          loading.close();
+        });
+    },
+  },
 });
 </script>
 <style lang="scss" scoped>
 .main {
   height: 400px;
   width: 100%;
+
+  display: flex;
+
   .graph {
-    width: 70%;
+    flex-grow: 2;
     height: 400px;
+  }
+  .person {
+    width: 30%;
+    overflow-y: auto;
   }
 }
 </style>

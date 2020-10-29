@@ -24,18 +24,33 @@ module.exports = function(router) {
     ctx.body = data;
   });
   // v2
+  // drug
   router.post("/drug/search", async ctx => {
     ctx.body = require("./fakedata/v2/drug/search.json");
   });
   router.post("/drug/graph", async ctx => {
     ctx.body = require("./fakedata/v2/drug/graph.json");
   });
+  router.get("/drug/person/:phoneNumber", async ctx => {
+    ctx.body = require("./fakedata/v2/drug/person.json");
+  });
+  router.get("/drug/track/:phoneNumber", async ctx => {
+    ctx.body = require("./fakedata/v2/drug/track.json");
+  });
+  // whoring
   router.post("/whoring/search", async ctx => {
     ctx.body = require("./fakedata/v2/whoring/search.json");
   });
   router.post("/whoring/graph", async ctx => {
     ctx.body = require("./fakedata/v2/whoring/graph.json");
   });
+  router.get("/whoring/person/:phoneNumber", async ctx => {
+    ctx.body = require("./fakedata/v2/whoring/person.json");
+  });
+  router.get("/whoring/track/:phoneNumber", async ctx => {
+    ctx.body = require("./fakedata/v2/whoring/track.json");
+  });
+  // fraud
   router.post("/fraud/search", async ctx => {
     ctx.body = require("./fakedata/v2/fraud/search.json");
   });

@@ -53,12 +53,6 @@ class APIClient {
   //   });
   // }
 
-  getPersonData(type, phoneNumber: string) {
-    return this.invoke({
-      url: BaseURL[type] + "/" + phoneNumber
-    });
-  }
-
   getFraudInfo(phoneNumber: string) {
     return this.invoke({
       url: BaseURL["fraud"] + "/" + phoneNumber
@@ -78,6 +72,16 @@ class APIClient {
       url: BaseURL[type] + "/graph",
       method: "post",
       data: { phoneNumbers }
+    });
+  }
+  getPersonData(type, phoneNumber: string) {
+    return this.invoke({
+      url: BaseURL[type] + "/person/" + phoneNumber
+    });
+  }
+  getTrackData(type, phoneNumber: string) {
+    return this.invoke({
+      url: BaseURL[type] + "/track/" + phoneNumber
     });
   }
 }

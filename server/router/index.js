@@ -47,6 +47,7 @@ module.exports = function(router) {
   });
 
   //v2
+  // drug
   router.post("/drug/search", async ctx => {
     const { phoneNumbers } = ctx.request.body;
     ctx.body = await dragAPI.search(phoneNumbers);
@@ -55,6 +56,16 @@ module.exports = function(router) {
     const { phoneNumbers } = ctx.request.body;
     ctx.body = await dragAPI.graph(phoneNumbers);
   });
+  router.get("/drug/person/:phoneNumber", async ctx => {
+    const { phoneNumber } = ctx.params;
+    ctx.body = await dragAPI.getGraphPersonData(phoneNumber);
+  });
+  router.get("/drug/track/:phoneNumber", async ctx => {
+    const { phoneNumber } = ctx.params;
+    ctx.body = await dragAPI.track(phoneNumber);
+  });
+
+  // whoring
   router.post("/whoring/search", async ctx => {
     const { phoneNumbers } = ctx.request.body;
     ctx.body = await whoringAPI.search(phoneNumbers);
@@ -63,6 +74,16 @@ module.exports = function(router) {
     const { phoneNumbers } = ctx.request.body;
     ctx.body = await whoringAPI.graph(phoneNumbers);
   });
+  router.get("/whoring/person/:phoneNumber", async ctx => {
+    const { phoneNumber } = ctx.params;
+    ctx.body = await whoringAPI.getGraphPersonData(phoneNumber);
+  });
+  router.get("/whoring/track/:phoneNumber", async ctx => {
+    const { phoneNumber } = ctx.params;
+    ctx.body = await whoringAPI.track(phoneNumber);
+  });
+
+  // fraud
   router.post("/fraud/search", async ctx => {
     const { phoneNumbers } = ctx.request.body;
     ctx.body = await fraudAPI.search(phoneNumbers);

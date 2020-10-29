@@ -21,16 +21,16 @@ import Vue from "vue";
 import echarts from "echarts";
 
 export default Vue.extend({
-  props: {
-    graphData: Object,
-    type: String,
-  },
   data(): any {
     return {
       homeareaGraph: null,
       callGraph: null,
       msgGraph: null,
     };
+  },
+  props: {
+    graphData: Object,
+    type: String,
   },
   watch: {
     graphData(newData) {

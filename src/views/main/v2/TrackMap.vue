@@ -10,14 +10,45 @@ export default Vue.extend({
   data() {
     return {
       map: undefined,
-      overView: undefined,
-      marker: undefined,
     };
   },
   mounted() {
     this.baiduMap();
   },
+  props: {
+    trackData: Object,
+  },
+  watch: {
+    trackData(data) {
+      console.log(">>>>>", data);
+      const { trackingPoints, clusters } = data;
+      trackingPoints.forEach((x) => {
+        this.addPoint(x.long, x.lat);
+      });
+      clusters.forEach((x) => {
+        this.addCircle(x.center.long, x.center.lat);
+      });
+    },
+  },
   methods: {
+    addPoint: function (longitude, latitude) {
+      if (!this.map) return;
+      let point = new BMap.Point(longitude, latitude);
+      let circle = new BMap.Circle(point, 2000, {
+        strokeColor: "red",
+        fillColor: "red",
+      });
+      this.map.addOverlay(circle);
+    },
+    addCircle: function (longitude, latitude) {
+      if (!this.map) return;
+      let point = new BMap.Point(longitude, latitude);
+      let circle = new BMap.Circle(point, 4000, {
+        strokeColor: "red",
+        // fillColor: "red",
+      });
+      this.map.addOverlay(circle);
+    },
     baiduMap: function () {
       const tileConfig = {
         tiles_ext: ".png",
@@ -44,13 +75,13 @@ export default Vue.extend({
         );
       };
 
-      let map = new BMap.Map("map");
-      map.addTileLayer(tileLayer);
-      // map.enableScrollWheelZoom(true);
-      map.addControl(new BMap.NavigationControl());
+      this.map = new BMap.Map("map");
+      this.map.addTileLayer(tileLayer);
+      this.map.enableScrollWheelZoom(true);
+      this.map.addControl(new BMap.NavigationControl());
       setTimeout(() => {
-        let point = new BMap.Point(116.187564, 39.262842);
-        map.centerAndZoom(point, 6);
+        let point = new BMap.Point(116.404, 39.915);
+        this.map.centerAndZoom(point, 6);
       }, 500);
     },
   },

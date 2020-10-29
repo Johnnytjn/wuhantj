@@ -13,7 +13,19 @@
         </div>
       </div>
       <div class="detail" v-if="!!graphData">
-        <detail :graphData="graphData" :type="type" />
+        <fraud-graph
+          :graphData="graphData"
+          :type="type"
+          v-if="type === 'fraud'"
+        />
+        <el-tabs tab-position="left" v-if="type !== 'fraud'">
+          <el-tab-pane label="群体发现"
+            ><group-discovery :graphData="graphData" :type="type"
+          /></el-tab-pane>
+          <el-tab-pane label="轨迹分析"
+            ><track-map :trackData="trackData"
+          /></el-tab-pane>
+        </el-tabs>
       </div>
     </div>
     <!-- <div class="drug-content">
@@ -43,15 +55,22 @@ import Detail from "./v2/Detail.vue";
 import Person from "./v2/Person.vue";
 import FeatureGraph from "./v2/FeatureGraph.vue";
 
+import TrackMap from "./v2/TrackMap.vue";
+import GroupDiscovery from "./v2/GroupDiscovery.vue";
+import FraudGraph from "./v2/FraudGraph.vue";
+
 export default Vue.extend({
   components: {
     Search,
     FeatureGraph,
-    Detail,
     Person,
+    TrackMap,
+    GroupDiscovery,
+    FraudGraph,
   },
   data() {
     return {
+      trackData: null,
       featureInfo: null,
       personData: null,
       graphData: null,
@@ -114,20 +133,26 @@ export default Vue.extend({
         .search(this.type, phoneNumbers)
         .then((data) => {
           if (data["exist"] === 1) {
-            const { personInfo, featureInfo } = data;
-            if (personInfo) {
-              this.personData = personInfo;
-            }
-            if (featureInfo) {
-              this.featureInfo = featureInfo;
-            }
-
             if (this.type !== "fraud") {
+              const { personInfo, featureInfo } = data;
+
+              if (personInfo) {
+                this.personData = personInfo;
+              }
+              if (featureInfo) {
+                this.featureInfo = featureInfo;
+              }
               apiClient.getGraph(this.type, phoneNumbers).then((data) => {
                 this.graphData = data;
               });
+
+              apiClient.getTrackData(this.type, phoneNumbers).then((data) => {
+                this.trackData = data;
+              });
             } else {
-              this.graphData = data;
+              this.graphData = data["show_feature"];
+              this.personData = data["basic-info"];
+              this.featureInfo = data["featureInfo"];
             }
           } else {
             this.$error("该电话没有匹配数据");

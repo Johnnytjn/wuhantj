@@ -11,7 +11,7 @@
       <div style="width: 50%">
         <data-field
           label="归属地"
-          :value="getValue('homeArea')"
+          :value="getValue('home_area')"
           style="margin-top: unset"
         />
       </div>
@@ -34,8 +34,8 @@ export default Vue.extend({
   data() {
     return {
       activeRegionTableHeaders: [
-        { prop: "code", label: "编码" },
-        { prop: "region", label: "区域地址" },
+        { prop: "CI", label: "编码" },
+        { prop: "address", label: "区域地址" },
       ],
     };
   },
@@ -47,7 +47,7 @@ export default Vue.extend({
       return getPropValue(this.personData, name);
     },
     activeRegionTableData() {
-      return this.getValue("activeRegion");
+      return this.getValue("active_region");
     },
   },
 });

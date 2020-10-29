@@ -1,5 +1,5 @@
 <template>
-  <div id="person-container">
+  <div id="graph-person">
     <el-tabs type="card">
       <el-tab-pane :label="type === 'fraud' ? '基本信息' : '个人信息'">
         <component :is="tabPersonal" :personData="personalData" />
@@ -62,7 +62,7 @@ export default Vue.extend({
   },
   watch: {
     personData(data) {
-      const elem = document.querySelector("#person-container") as any;
+      const elem = document.querySelector("#graph-person") as any;
       if (data && elem) {
         elem.style.opacity = "1";
       } else {
@@ -118,7 +118,7 @@ export default Vue.extend({
   padding: 0px 20px 0px 20px !important;
 }
 
-#person-container {
+#graph-person {
   transition: all 1s;
   opacity: 0;
 }

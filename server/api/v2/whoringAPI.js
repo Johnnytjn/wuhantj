@@ -10,6 +10,16 @@ module.exports = class BackendAPI extends BaseBackendAPI {
     return this.invoke({ url, method: "post", data: { phoneNumbers } });
   }
 
+  getGraphPersonData(phoneNumber) {
+    const url = this.baseUrl + "/whoring/person/" + phoneNumber;
+    return this.invoke({ url });
+  }
+
+  track(phoneNumber) {
+    const url = this.baseUrl + "/whoring/track/" + phoneNumber;
+    return this.invoke({ url });
+  }
+
   async graph(phoneNumbers) {
     let rawData;
     const url = this.baseUrl + "/whoring/graph";
