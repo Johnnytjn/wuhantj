@@ -35,12 +35,15 @@ export default Vue.extend({
   watch: {
     graphData(newData) {
       if (!newData) {
-        // if (this.homeareaGraph) {
-        //   this.homeareaGraph.clear();
-        // }
-        // if (this.homeareaGraph) {
-        //   this.homeareaGraph.clear();
-        // }
+        if (this.homeareaGraph) {
+          this.homeareaGraph.clear();
+        }
+        if (this.callGraph) {
+          this.callGraph.clear();
+        }
+        if (this.msgGraph) {
+          this.msgGraph.clear();
+        }
         return;
       }
       this.drawHomeareaGraph(newData["home_area"]);

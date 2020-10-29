@@ -102,10 +102,13 @@ export default Vue.extend({
       console.log(newType, oldType);
       if (oldType !== newType) {
         this.type = newType;
+
         this.personData = null;
         this.graphHumanData = null;
         this.featureInfo = null;
         this.graphData = null;
+        this.trackData = null;
+
         this.$clearMessage();
         // console.log(">>>>> force");
         // this.$forceUpdate();
