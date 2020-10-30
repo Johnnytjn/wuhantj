@@ -13,14 +13,20 @@
         </div>
       </div>
       <div class="detail">
-        <fraud-graph
-          :graphData="graphData"
-          :type="type"
-          v-show="type === 'fraud'"
-        />
+        <div
+          class="fraud-info"
+          v-show="type === 'fraud' && graphData && graphHumanData"
+        >
+          <div class="fraud-info-graph">
+            <fraud-graph :graphData="graphData" :type="type" />
+          </div>
+          <div class="fraud-info-person">
+            <person-info :personData="graphHumanData" :type="type" />
+          </div>
+        </div>
         <el-tabs
           tab-position="left"
-          v-show="type !== 'fraud' && graphHumanData"
+          v-show="type !== 'fraud' && graphData && graphHumanData"
         >
           <el-tab-pane label="群体发现">
             <div class="groupanalysis">
@@ -114,16 +120,16 @@ export default Vue.extend({
         // this.$forceUpdate();
       }
     },
-    graphHumanData(data) {
-      const elem = document.getElementsByClassName(
-        "groupanalysis-person"
-      )[0] as any;
-      if (data) {
-        elem.style.borderLeft = "1px solid rgb(238, 241, 246)";
-      } else {
-        elem.style.borderLeft = "";
-      }
-    },
+    // graphHumanData(data) {
+    //   const elem = document.getElementsByClassName(
+    //     "groupanalysis-person"
+    //   )[0] as any;
+    //   if (data) {
+    //     elem.style.borderLeft = "1px solid rgb(238, 241, 246)";
+    //   } else {
+    //     elem.style.borderLeft = "";
+    //   }
+    // },
   },
   methods: {
     showPersonData(selectedPerson, needUpdateGraph) {
@@ -199,6 +205,7 @@ export default Vue.extend({
               this.graphData = data["show_feature"];
               this.personData = data["basic-info"];
               this.featureInfo = data["featureInfo"];
+              this.graphHumanData = data;
             }
           } else {
             this.$error("该电话没有匹配数据");
@@ -277,6 +284,20 @@ export default Vue.extend({
     padding-left: 24px;
     padding-right: 24px;
 
+    .fraud-info {
+      display: flex;
+
+      .fraud-info-graph {
+        width: 70%;
+      }
+
+      .fraud-info-person {
+        border-left: 1px solid rgb(238, 241, 246);
+        width: 30%;
+        overflow-y: auto;
+      }
+    }
+
     .groupanalysis {
       height: 600px;
       width: 100%;
@@ -289,6 +310,7 @@ export default Vue.extend({
       .groupanalysis-person {
         width: 30%;
         overflow-y: auto;
+        border-left: 1px solid rgb(238, 241, 246);
       }
     }
   }

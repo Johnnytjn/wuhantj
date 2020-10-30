@@ -60,16 +60,16 @@ export default Vue.extend({
     personData: Object,
     type: String,
   },
-  watch: {
-    personData(data) {
-      const elem = document.querySelector("#graph-person") as any;
-      if (data && elem) {
-        elem.style.opacity = "1";
-      } else {
-        elem!.style.opacity = "0";
-      }
-    },
-  },
+  // watch: {
+  //   personData(data) {
+  //     const elem = document.querySelector("#graph-person") as any;
+  //     if (data && elem) {
+  //       elem.style.opacity = "1";
+  //     } else {
+  //       elem!.style.opacity = "0";
+  //     }
+  //   },
+  // },
   computed: {
     tabPersonal() {
       return TAB_COMPONENTS[this.type]["TabPersonal"];
@@ -120,7 +120,7 @@ export default Vue.extend({
 
 #graph-person {
   transition: all 1s;
-  opacity: 0;
+  opacity: 1;
 }
 </style>
 
