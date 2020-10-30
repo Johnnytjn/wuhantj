@@ -1,6 +1,9 @@
 <template>
   <div class="info-comm">
-    <data-table :tableHeaders="recordTableHeaders" :tableData="recordTableData" />
+    <data-table
+      :tableHeaders="recordTableHeaders"
+      :tableData="recordTableData"
+    />
   </div>
 </template>
 
@@ -14,23 +17,23 @@ export default Vue.extend({
       recordTableHeaders: [
         { prop: "event_no", label: "案件编号" },
         { prop: "event_name", label: "案件名称" },
-        { prop: "event_type", label: "案件类别" }
-      ]
+        { prop: "event_type", label: "案件类别" },
+      ],
     };
   },
   props: {
-    personData: Object
+    personData: Object,
   },
   methods: {
     getValue(name) {
       return getPropValue(this.personData, name);
-    }
+    },
   },
   computed: {
     recordTableData() {
       return this.getValue("criminal_record");
-    }
-  } as any
+    },
+  } as any,
 });
 </script>
 

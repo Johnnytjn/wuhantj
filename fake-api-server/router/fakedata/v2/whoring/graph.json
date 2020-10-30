@@ -1,111 +1,35 @@
 {
   "personInfo": {
-    "sfzh": "123456789123132",
-    "predict": 98.12,
-    "name": "李四",
+    "sex": 1,
+    "homeAddress": "同济大学",
+    "culture": 0,
     "photo": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559300925616&di=855031b1140cd0ac934dbaa9dd728a6b&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171030%2F26ed195281334ba4b1752394b60eb29a.jpeg",
-    "sex": 0,
-    "age": 44,
+    "age": 20,
+    "predict": 98.0,
+    "name": "张三",
+    "marriage": 0,
     "birthday": "1995-07-08",
-    "marriage": 22,
-    "culture": 83,
-    "homeAddress": "上海市嘉定区曹安公路4800号同济大学"
+    "sfzh": "420221197207131220"
   },
   "linkInfo": {
-    "jk": 8,
-    "pfhjhk": 9,
-    "yckgj": 3,
-    "zjzk": "130xxxxxxxx",
-    "keyword": 10,
-    "bithday": "1995-07-08",
-    "sensitivePlace": ["昆明", "丽江", "玉溪"],
-    "sensitivePhone": [
-      { "phoneNum": "12345678", "place": "昆明" },
-      { "phoneNum": "12345678", "place": "昆明" },
-      { "phoneNum": "12345678", "place": "昆明" }
-    ],
-    "firstAssociate": [
-      { "name": "张三", "sfzh": "123456765432345678" },
-      { "name": "张三", "sfzh": "123456765432345678" },
-      { "name": "张三", "sfzh": "123456765432345678" }
-    ]
+    "sh_keyword": 1,
+    "dk_message": 2,
+    "sh_message": 3,
+    "sh_contact": 4,
+    "zr_contact": 5,
+    "sh_associate": [{ "name": "张3", "sfzh": "421222199508272816" }],
+    "zr_associate": [{ "name": "整容院1", "phone": "号码4" }]
   },
   "trackInfo": {
-    "hotelTimes": 11,
-    "changeHotelTimes": 22,
-    "checkInMultiHotel": 44,
-    "toPoisonPlace": [
-      { "date": "2019-23-09", "place": "丽江" },
-      { "date": "2019-23-09", "place": "丽江" },
-      { "date": "2019-23-09", "place": "丽江" },
-      { "date": "2019-23-09", "place": "丽江" }
-    ],
-    "zfyc": [
-      {
-        "startTime": "2019-23-09",
-        "endtime": "2019-30-09",
-        "dateNum": 10,
-        "totalLAC": 10
-      },
-      {
-        "startTime": "2019-23-09",
-        "endtime": "2019-30-09",
-        "dateNum": 10,
-        "totalLAC": 10
-      },
-      {
-        "startTime": "2019-23-09",
-        "endtime": "2019-30-09",
-        "dateNum": 10,
-        "totalLAC": 10
-      }
-    ]
+    "change_hotel_day": 10,
+    "change_hotel_time": 10,
+    "moving_long_distance": 10,
+    "moving_sum_distance": 2.19
   },
   "criminalRecord": {
-    "criminalRecord": [
-      {
-        "eventNo": "00001",
-        "eventName": "昆明市011运毒案",
-        "eventType": "运毒"
-      },
-      {
-        "eventNo": "00001",
-        "eventName": "昆明市011运毒案",
-        "eventType": "运毒"
-      },
-      {
-        "eventNo": "00001",
-        "eventName": "昆明市011运毒案",
-        "eventType": "运毒"
-      }
-    ]
-  },
-  "postInfo": {
-    "changeAddress": 4,
-    "noAddress": 5,
-    "unclearAddress": 6,
-    "sensitiveAddress": [
-      { "sensTime": "2019-05-30", "sensAddress": "云南省昆明市xxxxx" }
-    ],
-    "overWeightPackage": [
-      {
-        "time": "2018-09-12",
-        "sendAddress": "上海市嘉定区xxxxxxxxx",
-        "productName": "面粉",
-        "weight": "10kg"
-      },
-      {
-        "time": "2018-09-12",
-        "sendAddress": "上海市嘉定区xxxxxxxxx",
-        "productName": "面粉",
-        "weight": "10kg"
-      },
-      {
-        "time": "2018-09-12",
-        "sendAddress": "上海市嘉定区xxxxxxxxx",
-        "productName": "面粉",
-        "weight": "10kg"
-      }
+    "criminal_record": [
+      { "event_no": "00001", "event_name": "涉黄案件1", "event_type": "涉黄" },
+      { "event_no": "00002", "event_name": "涉黄案件2", "event_type": "涉黄" }
     ]
   },
   "relationships": {
