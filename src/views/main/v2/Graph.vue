@@ -45,8 +45,12 @@ export default Vue.extend({
         return;
       }
 
-      if (oldData === null && newData) {
+      if (
+        (oldData === null && newData) ||
+        (newData && !!newData.graph && !!oldData)
+      ) {
         // init
+        console.log(">>>>>> reset graph");
         const graph = newData.graph;
         const categoryCount = graph["categoryCount"];
         const nodeData = graph.nodes.map(buildGraphNode);
@@ -107,8 +111,10 @@ export default Vue.extend({
             .getBoundingClientRect();
           this.chart.resize({ width, height });
         });
-      } else if (oldData && newData) {
+      } else if (newData && !!newData.nodes) {
         // update
+        console.log(">>>>>> update graph");
+
         const updatedOptionData = Object.assign({}, this.chart.getOption());
         const series0 = updatedOptionData.series[0];
         // const updatedOptionData = { series: [{ data: [], links: [] }] };

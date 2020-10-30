@@ -26,9 +26,12 @@
         </div>
         <el-tabs
           tab-position="left"
-          v-show="type !== 'fraud' && graphData && graphHumanData"
+          v-show="type !== 'fraud' && !!graphData && !!graphHumanData"
+          @tab-click="onClickTab"
+          value="group"
+          :key="type"
         >
-          <el-tab-pane label="群体发现">
+          <el-tab-pane label="群体发现" name="group">
             <div class="groupanalysis">
               <div class="groupanalysis-graph">
                 <graph
@@ -43,7 +46,7 @@
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="轨迹分析" @tab-click="onClickTrackTab"
+          <el-tab-pane label="轨迹分析" name="track"
             ><track-map :trackData="trackData"
           /></el-tab-pane>
         </el-tabs>
@@ -99,6 +102,8 @@ export default Vue.extend({
       personData: null,
       graphData: null,
       type: this.$route.params.type || "drug",
+      resetTrackDataEver: false,
+      numberInSearch: null,
     };
   },
   watch: {
@@ -114,6 +119,8 @@ export default Vue.extend({
         this.featureInfo = null;
         this.graphData = null;
         this.trackData = null;
+        this.resetTrackDataEver = false;
+        this.numberInSearch = null;
 
         this.$clearMessage();
         // console.log(">>>>> force");
@@ -132,8 +139,15 @@ export default Vue.extend({
     // },
   },
   methods: {
-    onClickTrackTab() {
-      console.log(">>>>>> click track");
+    onClickTab(tab) {
+      if (tab.name === "track") {
+        if (this.resetTrackDataEver === false) {
+          this.trackData = Object.assign({}, this.trackData);
+          this.resetTrackDataEver = true;
+        }
+      } else {
+        this.graphData = Object.assign({}, this.graphData);
+      }
     },
     showPersonData(selectedPerson, needUpdateGraph) {
       console.log("$$$$selectedPerson:", selectedPerson);
@@ -187,6 +201,7 @@ export default Vue.extend({
         .search(this.type, phoneNumbers)
         .then((data) => {
           if (data["exist"] === 1) {
+            this.numberInSearch = phoneNumbers[0];
             if (this.type !== "fraud") {
               const { personInfo, featureInfo } = data;
 
