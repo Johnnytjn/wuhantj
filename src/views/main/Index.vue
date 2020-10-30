@@ -13,17 +13,16 @@
         </div>
       </div>
       <div class="detail">
-        <div
-          class="fraud-info"
-          v-show="type === 'fraud' && graphData && graphHumanData"
-        >
-          <div class="fraud-info-graph">
-            <fraud-graph :graphData="graphData" :type="type" />
+        <template v-if="type === 'fraud' && fraudGraphData && graphHumanData">
+          <div class="fraud-info">
+            <div class="fraud-info-graph">
+              <fraud-graph :graphData="fraudGraphData" :type="type" />
+            </div>
+            <div class="fraud-info-person">
+              <person-info :personData="graphHumanData" :type="type" />
+            </div>
           </div>
-          <div class="fraud-info-person">
-            <person-info :personData="graphHumanData" :type="type" />
-          </div>
-        </div>
+        </template>
         <el-tabs
           tab-position="left"
           v-show="type !== 'fraud' && !!graphData && !!graphHumanData"
@@ -104,6 +103,7 @@ export default Vue.extend({
       type: this.$route.params.type || "drug",
       resetTrackDataEver: false,
       numberInSearch: null,
+      fraudGraphData: null,
     };
   },
   watch: {
@@ -121,6 +121,7 @@ export default Vue.extend({
         this.trackData = null;
         this.resetTrackDataEver = false;
         this.numberInSearch = null;
+        this.fraudGraphData = null;
 
         this.$clearMessage();
         // console.log(">>>>> force");
@@ -150,7 +151,6 @@ export default Vue.extend({
       }
     },
     showPersonData(selectedPerson, needUpdateGraph) {
-      console.log("$$$$selectedPerson:", selectedPerson);
       const { id: phoneNumber, category, scrollTop } = selectedPerson;
       this.graphHumanData = null;
       const loading = this.$loading({
@@ -220,7 +220,7 @@ export default Vue.extend({
                 this.trackData = data;
               });
             } else {
-              this.graphData = data["show_feature"];
+              this.fraudGraphData = data["show_feature"];
               this.personData = data["basic-info"];
               this.featureInfo = data["featureInfo"];
               this.graphHumanData = data;

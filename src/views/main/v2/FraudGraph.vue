@@ -34,6 +34,11 @@ export default Vue.extend({
   },
   watch: {
     graphData(newData) {
+      this.renderGraphs(newData);
+    },
+  },
+  methods: {
+    renderGraphs(newData) {
       if (!newData) {
         if (this.homeareaGraph) {
           this.homeareaGraph.clear();
@@ -50,8 +55,6 @@ export default Vue.extend({
       this.drawCallGraph(newData["call"]);
       this.drawMsgGraph(newData["msg"]);
     },
-  },
-  methods: {
     drawMsgGraph(graphData) {
       const { bj, zj, bjwd, bjbd } = graphData;
 
@@ -205,6 +208,9 @@ export default Vue.extend({
     this.msgGraph = echarts.init(document.getElementById("msgGraph"), null, {
       renderer: "svg",
     });
+    if (this.graphData) {
+      this.renderGraphs(this.graphData);
+    }
   },
 });
 </script>
