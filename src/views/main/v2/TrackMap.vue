@@ -24,9 +24,9 @@ export default Vue.extend({
       trackingPoints.forEach((x) => {
         this.addPoint(x.long, x.lat);
       });
-      clusters.forEach((x) => {
-        this.addCircle(x.center.long, x.center.lat);
-      });
+      // clusters.forEach((x) => {
+      //   this.addCircle(x.center.long, x.center.lat);
+      // });
 
       const firstTrackingPoint =
         trackingPoints && trackingPoints.length > 0 && trackingPoints[0];

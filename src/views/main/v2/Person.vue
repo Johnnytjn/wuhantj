@@ -39,6 +39,7 @@ export default Vue.extend({
 <style scoped>
 .info-personal {
   display: flex;
+  height: 100%;
 }
 
 #person-info {

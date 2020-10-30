@@ -65,6 +65,9 @@ module.exports = class BackendAPI extends BaseBackendAPI {
       graphData["categoryCount"] = targetNums.length;
 
       result["graph"] = graphData;
+
+      const { personInfo, linkInfo, trackInfo, criminalRecord, postInfo } = rawData;
+      result["personData"] = { personInfo, linkInfo, trackInfo, criminalRecord, postInfo };
     }
 
     return result;

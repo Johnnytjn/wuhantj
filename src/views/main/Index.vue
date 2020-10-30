@@ -179,8 +179,6 @@ export default Vue.extend({
         .then((data) => {
           if (data["exist"] === 1) {
             if (this.type !== "fraud") {
-              this.showPersonData({ id: phoneNumbers[0] });
-
               const { personInfo, featureInfo } = data;
 
               if (personInfo) {
@@ -191,6 +189,7 @@ export default Vue.extend({
               }
               apiClient.getGraph(this.type, phoneNumbers).then((data) => {
                 this.graphData = data;
+                this.graphHumanData = data["personData"];
               });
 
               apiClient.getTrackData(this.type, phoneNumbers).then((data) => {
@@ -264,7 +263,8 @@ export default Vue.extend({
       align-items: center;
       text-align: left;
       padding: 20px;
-      width: 30%;
+      width: 40%;
+      overflow: auto;
     }
 
     .person-graph {
