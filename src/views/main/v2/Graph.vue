@@ -72,8 +72,8 @@ export default Vue.extend({
             {
               name: "关系图",
               type: "graph",
-              // layout: "force",
-              layout: "circular",
+              layout: "force",
+              // layout: "circular",
               data: nodeData,
               links: linkData,
               categories: categories,

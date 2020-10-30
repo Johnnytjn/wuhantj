@@ -20,32 +20,55 @@ export default Vue.extend({
   },
   watch: {
     trackData(data) {
-      const { trackingPoints, clusters } = data;
-      trackingPoints.forEach((x) => {
-        this.addPoint(x.long, x.lat);
+      if (!data) {
+        return;
+      }
+      const persons = Object.entries(data.trackingPoints);
+      persons.forEach(([person, pointData]) => {
+        pointData.forEach((x, idx) => {
+          if (idx <= pointData.length - 2) {
+            const fromPoint = pointData[idx];
+            const toPoint = pointData[idx + 1];
+            this.addHistoryLine(fromPoint, toPoint);
+            this.addPoint(fromPoint);
+            this.addPoint(toPoint);
+          }
+        });
       });
-      // clusters.forEach((x) => {
-      //   this.addCircle(x.center.long, x.center.lat);
-      // });
-
       const firstTrackingPoint =
-        trackingPoints && trackingPoints.length > 0 && trackingPoints[0];
+        persons &&
+        persons.length > 0 &&
+        persons[0].length > 0 &&
+        persons[0][1][0];
       if (firstTrackingPoint) {
-        const point = new BMap.Point(
-          firstTrackingPoint.long,
-          firstTrackingPoint.lat
-        );
-        this.map.centerAndZoom(point, 6);
+        setTimeout(() => {
+          const point = new BMap.Point(
+            firstTrackingPoint.long,
+            firstTrackingPoint.lat
+          );
+          this.map.centerAndZoom(point, 9);
+        }, 200);
       }
     },
   },
   methods: {
-    addPoint: function (longitude, latitude) {
+    addHistoryLine: function (from, to) {
       if (!this.map) return;
-      let point = new BMap.Point(longitude, latitude);
-      let circle = new BMap.Circle(point, 2000, {
+      let pointFrom = new BMap.Point(from.long, from.lat);
+      let pointTo = new BMap.Point(to.long, to.lat);
+      let line = new BMap.Polyline([pointFrom, pointTo], {
+        strokeWeight: 3,
         strokeColor: "red",
-        fillColor: "red",
+      });
+      this.map.addOverlay(line);
+    },
+    addPoint: function (p) {
+      if (!this.map) return;
+      const pointColor = p.type === 0 ? "red" : "blue";
+      let point = new BMap.Point(p.long, p.lat);
+      let circle = new BMap.Circle(point, 200, {
+        strokeColor: pointColor,
+        fillColor: pointColor,
       });
       this.map.addOverlay(circle);
     },
@@ -88,6 +111,10 @@ export default Vue.extend({
       this.map.addTileLayer(tileLayer);
       this.map.enableScrollWheelZoom(true);
       this.map.addControl(new BMap.NavigationControl());
+      // setTimeout(() => {
+      //   let point = new BMap.Point(120.187564, 30.262842);
+      //   this.map.centerAndZoom(point, 9);
+      // }, 500);
     },
   },
 });

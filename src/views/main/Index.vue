@@ -43,7 +43,7 @@
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="轨迹分析"
+          <el-tab-pane label="轨迹分析" @tab-click="onClickTrackTab"
             ><track-map :trackData="trackData"
           /></el-tab-pane>
         </el-tabs>
@@ -132,6 +132,9 @@ export default Vue.extend({
     // },
   },
   methods: {
+    onClickTrackTab() {
+      console.log(">>>>>> click track");
+    },
     showPersonData(selectedPerson, needUpdateGraph) {
       console.log("$$$$selectedPerson:", selectedPerson);
       const { id: phoneNumber, category, scrollTop } = selectedPerson;
