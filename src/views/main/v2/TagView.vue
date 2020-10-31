@@ -131,26 +131,24 @@ export default Vue.extend({
   .tag-view-tags {
     width: 50%;
     height: 100%;
-    #tagGraph {
-      width: 100%;
-      height: 100%;
-    }
+    padding: 32px;
   }
   .tag-view-types {
     width: 50%;
     height: 100%;
     text-align: left;
-    padding: 24px;
+    padding: 32px;
 
     .tag-view-type {
-      margin-bottom: 12px;
+      margin-bottom: 16px;
 
       .tag-view-typename {
         margin-bottom: 5px;
       }
 
       .el-tag {
-        margin-right: 10px;
+        margin-right: 16px;
+        margin-bottom: 16px;
       }
     }
   }
