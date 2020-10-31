@@ -138,6 +138,7 @@ export default Vue.extend({
     height: 100%;
     text-align: left;
     padding: 32px;
+    overflow-y: auto;
 
     .tag-view-type {
       margin-bottom: 16px;
