@@ -306,6 +306,7 @@ export default Vue.extend({
       padding: 20px;
       width: 60%;
       overflow: auto;
+      font-size: 16px;
     }
 
     .person-graph {

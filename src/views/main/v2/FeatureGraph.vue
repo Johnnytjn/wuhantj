@@ -71,6 +71,7 @@ export default Vue.extend({
             },
             label: {
               show: true,
+              verticalAlign: "middle",
             },
             symbolSize: [80, 50],
             symbol: "rect",
