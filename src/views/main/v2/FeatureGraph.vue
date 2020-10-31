@@ -30,7 +30,10 @@ export default Vue.extend({
 
       const nodeData = [{ name: `${predict}%`, category: 0 }];
       featureName.forEach((name) => {
-        const formattedName = name.substring(0, 5) + "\n" + name.substring(5);
+        const formattedName =
+          name.length > 5
+            ? name.substring(0, 5) + "\r\n" + name.substring(5)
+            : name;
         nodeData.push({
           name: formattedName,
           category: 1,
@@ -85,7 +88,7 @@ export default Vue.extend({
   mounted() {
     const that = this;
     this.chart = echarts.init(document.getElementById("featureGraph"), null, {
-      renderer: "svg",
+      // renderer: "svg",
     });
     window.onresize = this.chart.resize;
   },
