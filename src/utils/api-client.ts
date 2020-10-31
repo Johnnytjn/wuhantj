@@ -84,6 +84,11 @@ class APIClient {
       url: BaseURL[type] + "/track/" + phoneNumber
     });
   }
+  getTagData(type, phoneNumber: string) {
+    return this.invoke({
+      url: BaseURL[type] + "/tag/" + phoneNumber
+    });
+  }
 }
 
 const apiClient = new APIClient();

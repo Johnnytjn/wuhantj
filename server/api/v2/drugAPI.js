@@ -20,6 +20,11 @@ module.exports = class BackendAPI extends BaseBackendAPI {
     return this.invoke({ url });
   }
 
+  tag(phoneNumber) {
+    const url = this.baseUrl + "/drug/tag/" + phoneNumber;
+    return this.invoke({ url });
+  }
+
   async graph(phoneNumbers) {
     let rawData;
     const url = this.baseUrl + "/drug/graph";
@@ -42,7 +47,7 @@ module.exports = class BackendAPI extends BaseBackendAPI {
       });
 
       const addCategoryAttr = (phoneNumber, categoryId) => {
-        const nodeIndex = graphData["nodes"].findIndex(x => x.id === phoneNumber);
+        const nodeIndex = graphData["nodes"].findIndex((x) => x.id === phoneNumber);
         const node = graphData["nodes"][nodeIndex];
         if (node["dataType"] === "target") {
           if (!node["category"]) {
@@ -56,7 +61,7 @@ module.exports = class BackendAPI extends BaseBackendAPI {
 
       Object.entries(relationships).forEach(([sourceNum, contactNums], index) => {
         addCategoryAttr(sourceNum, index);
-        contactNums.forEach(targetNum => {
+        contactNums.forEach((targetNum) => {
           addCategoryAttr(targetNum, index);
           graphData["links"].push({ source: sourceNum, target: targetNum });
         });

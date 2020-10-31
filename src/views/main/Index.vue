@@ -48,6 +48,9 @@
           <el-tab-pane label="轨迹分析" name="track"
             ><track-map :trackData="trackData"
           /></el-tab-pane>
+          <el-tab-pane label="标签展示" name="tag"
+            ><tag-view :tagData="tagData" v-if="type !== 'fraud' && !!tagData"
+          /></el-tab-pane>
         </el-tabs>
       </div>
     </div>
@@ -82,6 +85,7 @@ import TrackMap from "./v2/TrackMap.vue";
 import FraudGraph from "./v2/FraudGraph.vue";
 import Graph from "./v2/Graph.vue";
 import PersonInfo from "./v2/PersonInfo.vue";
+import TagView from "./v2/TagView.vue";
 
 export default Vue.extend({
   components: {
@@ -92,6 +96,7 @@ export default Vue.extend({
     FraudGraph,
     Graph,
     PersonInfo,
+    TagView,
   },
   data() {
     return {
@@ -104,6 +109,7 @@ export default Vue.extend({
       resetTrackDataEver: false,
       numberInSearch: null,
       fraudGraphData: null,
+      tagData: null,
     };
   },
   watch: {
@@ -122,22 +128,21 @@ export default Vue.extend({
         this.resetTrackDataEver = false;
         this.numberInSearch = null;
         this.fraudGraphData = null;
+        this.tagData = null;
 
         this.$clearMessage();
         // console.log(">>>>> force");
         // this.$forceUpdate();
       }
     },
-    // graphHumanData(data) {
-    //   const elem = document.getElementsByClassName(
-    //     "groupanalysis-person"
-    //   )[0] as any;
-    //   if (data) {
-    //     elem.style.borderLeft = "1px solid rgb(238, 241, 246)";
-    //   } else {
-    //     elem.style.borderLeft = "";
-    //   }
-    // },
+    personData(data) {
+      const elem = document.getElementsByClassName("general")[0] as any;
+      if (data) {
+        elem.style.borderBottom = "1px solid rgb(238, 241, 246)";
+      } else {
+        elem.style.borderBottom = "";
+      }
+    },
   },
   methods: {
     onClickTab(tab) {
@@ -146,8 +151,10 @@ export default Vue.extend({
           this.trackData = Object.assign({}, this.trackData);
           this.resetTrackDataEver = true;
         }
-      } else {
+      } else if (tab.name === "group") {
         this.graphData = Object.assign({}, this.graphData);
+      } else if (tab.name === "tag") {
+        this.tagData = Object.assign({}, this.tagData);
       }
     },
     showPersonData(selectedPerson, needUpdateGraph) {
@@ -219,6 +226,10 @@ export default Vue.extend({
               apiClient.getTrackData(this.type, phoneNumbers).then((data) => {
                 this.trackData = data;
               });
+
+              apiClient.getTagData(this.type, phoneNumbers).then((data) => {
+                this.tagData = data;
+              });
             } else {
               this.fraudGraphData = data["show_feature"];
               this.personData = data["basic-info"];
@@ -281,7 +292,7 @@ export default Vue.extend({
   .general {
     display: flex;
     height: 250px;
-    border-bottom: 1px solid rgb(238, 241, 246);
+    /* border-bottom: 1px solid rgb(238, 241, 246); */
 
     .person-info {
       display: flex;
