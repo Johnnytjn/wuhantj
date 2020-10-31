@@ -126,11 +126,10 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .tag-view {
   width: 100%;
-  height: 400px;
   display: flex;
   .tag-view-tags {
     width: 50%;
-    height: 100%;
+    height: 400px;
     padding: 32px;
   }
   .tag-view-types {
@@ -138,7 +137,6 @@ export default Vue.extend({
     height: 100%;
     text-align: left;
     padding: 32px;
-    overflow-y: auto;
 
     .tag-view-type {
       margin-bottom: 16px;
