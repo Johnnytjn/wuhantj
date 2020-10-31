@@ -107,6 +107,7 @@ export default Vue.extend({
       graphData: null,
       type: this.$route.params.type || "drug",
       resetTrackDataEver: false,
+      resetTagDataEver: false,
       numberInSearch: null,
       fraudGraphData: null,
       tagData: null,
@@ -126,6 +127,7 @@ export default Vue.extend({
         this.graphData = null;
         this.trackData = null;
         this.resetTrackDataEver = false;
+        this.resetTagDataEver = false;
         this.numberInSearch = null;
         this.fraudGraphData = null;
         this.tagData = null;
@@ -154,7 +156,10 @@ export default Vue.extend({
       } else if (tab.name === "group") {
         this.graphData = Object.assign({}, this.graphData);
       } else if (tab.name === "tag") {
-        this.tagData = Object.assign({}, this.tagData);
+        if (this.resetTagDataEver === false) {
+          this.tagData = Object.assign({}, this.tagData);
+          this.resetTagDataEver = true;
+        }
       }
     },
     showPersonData(selectedPerson, needUpdateGraph) {
