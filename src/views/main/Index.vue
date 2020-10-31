@@ -304,7 +304,7 @@ export default Vue.extend({
       align-items: center;
       text-align: left;
       padding: 20px;
-      width: 40%;
+      width: 60%;
       overflow: auto;
     }
 
