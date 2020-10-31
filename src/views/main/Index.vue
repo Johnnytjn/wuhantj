@@ -3,7 +3,7 @@
     <div class="drug-search">
       <search :onSearch="handleSearch" :type="type" />
     </div>
-    <div class="result">
+    <div class="result" :key="searchKey">
       <div class="general">
         <div class="person-info">
           <person :personData="personData" :type="type" />
@@ -54,20 +54,6 @@
         </el-tabs>
       </div>
     </div>
-    <!-- <div class="drug-content">
-      <div class="drug-graph">
-        <graph
-          :featureInfo="featureInfo"
-          :onPersonSelected="showPersonData"
-          :type="type"
-          v-if="type!=='fraud'"
-        />
-        <feature-graph :featureInfo="featureInfo" v-if="type==='fraud'" />
-      </div>
-      <div class="drug-person">
-        <person-info :personData="personData" :type="type" />
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -111,6 +97,7 @@ export default Vue.extend({
       numberInSearch: null,
       fraudGraphData: null,
       tagData: null,
+      searchKey: 1,
     };
   },
   watch: {
@@ -121,16 +108,7 @@ export default Vue.extend({
       if (oldType !== newType) {
         this.type = newType;
 
-        this.personData = null;
-        this.graphHumanData = null;
-        this.featureInfo = null;
-        this.graphData = null;
-        this.trackData = null;
-        this.resetTrackDataEver = false;
-        this.resetTagDataEver = false;
-        this.numberInSearch = null;
-        this.fraudGraphData = null;
-        this.tagData = null;
+        this.resetData();
 
         this.$clearMessage();
         // console.log(">>>>> force");
@@ -147,6 +125,18 @@ export default Vue.extend({
     },
   },
   methods: {
+    resetData() {
+      this.personData = null;
+      this.graphHumanData = null;
+      this.featureInfo = null;
+      this.graphData = null;
+      this.trackData = null;
+      this.resetTrackDataEver = false;
+      this.resetTagDataEver = false;
+      this.numberInSearch = null;
+      this.fraudGraphData = null;
+      this.tagData = null;
+    },
     onClickTab(tab) {
       if (tab.name === "track") {
         if (this.resetTrackDataEver === false) {
@@ -176,7 +166,12 @@ export default Vue.extend({
           this.graphHumanData = data;
           if (needUpdateGraph) {
             const personData = data["person_data"];
-            const updatedGraphData = { nodes: [], links: [], scrollTop };
+            const updatedGraphData = {
+              type: "update",
+              nodes: [],
+              links: [],
+              scrollTop,
+            };
             Object.entries(personData).forEach(([phoneNum, person]) => {
               const { name, score } = person;
               updatedGraphData.nodes.push({
@@ -203,7 +198,9 @@ export default Vue.extend({
         });
     },
     handleSearch(phoneNumbers) {
-      this.featureInfo = null;
+      this.resetData();
+      this.searchKey = this.searchKey + 1;
+
       const loading = this.$loading({
         fullscreen: false,
         target: ".drug-graph",

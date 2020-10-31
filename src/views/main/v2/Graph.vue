@@ -40,15 +40,43 @@ export default Vue.extend({
   },
   watch: {
     graphData(newData, oldData) {
+      this.renderGraph(newData, oldData);
+    },
+  },
+  methods: {
+    renderGraph(newData, oldData) {
       if (!newData && this.chart) {
         this.chart.clear();
         return;
       }
 
-      if (
-        (oldData === null && newData) ||
-        (newData && !!newData.graph && !!oldData)
-      ) {
+      if (newData.type === "update") {
+        // update
+        console.log(">>>>>> update graph");
+
+        const updatedOptionData = Object.assign({}, this.chart.getOption());
+        const series0 = updatedOptionData.series[0];
+        // const updatedOptionData = { series: [{ data: [], links: [] }] };
+        newData.nodes.forEach((node) => {
+          const { id, name, dataType, score, category } = node;
+          if (!series0.data.find((x) => x.id === id)) {
+            series0.data.push(
+              buildGraphNode({ id, name, dataType, score, category })
+            );
+          }
+        });
+        newData.links.forEach(({ source, target }) => {
+          if (
+            !series0.links.find(
+              (x) => x.source === source && x.target === target
+            )
+          ) {
+            series0.links.push(buildGraphLink({ source, target }));
+          }
+        });
+        this.chart.setOption(updatedOptionData);
+        document.querySelector(".el-main").scrollTop = newData.scrollTop;
+      } else {
         // init
         console.log(">>>>>> reset graph");
         const graph = newData.graph;
@@ -111,32 +139,6 @@ export default Vue.extend({
             .getBoundingClientRect();
           this.chart.resize({ width, height });
         });
-      } else if (newData && !!newData.nodes) {
-        // update
-        console.log(">>>>>> update graph");
-
-        const updatedOptionData = Object.assign({}, this.chart.getOption());
-        const series0 = updatedOptionData.series[0];
-        // const updatedOptionData = { series: [{ data: [], links: [] }] };
-        newData.nodes.forEach((node) => {
-          const { id, name, dataType, score, category } = node;
-          if (!series0.data.find((x) => x.id === id)) {
-            series0.data.push(
-              buildGraphNode({ id, name, dataType, score, category })
-            );
-          }
-        });
-        newData.links.forEach(({ source, target }) => {
-          if (
-            !series0.links.find(
-              (x) => x.source === source && x.target === target
-            )
-          ) {
-            series0.links.push(buildGraphLink({ source, target }));
-          }
-        });
-        this.chart.setOption(updatedOptionData);
-        document.querySelector(".el-main").scrollTop = newData.scrollTop;
       }
     },
   },
@@ -153,6 +155,7 @@ export default Vue.extend({
       that.onPersonSelected({ id, category, scrollTop }, true);
     });
     window.onresize = this.chart.resize;
+    this.renderGraph(this.graphData);
   },
 }) as any;
 </script>
