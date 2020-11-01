@@ -24,12 +24,22 @@ export default Vue.extend({
         return;
       }
       const persons = Object.entries(data.trackingPoints);
-      persons.forEach(([person, pointData]) => {
+      persons.forEach(([person, pointData], idx) => {
+        const lineColor =
+          idx === 0
+            ? "red"
+            : "rgb(" +
+              [
+                Math.round(Math.random() * 256),
+                Math.round(Math.random() * 256),
+                Math.round(Math.random() * 256),
+              ].join(",") +
+              ")";
         pointData.forEach((x, idx) => {
           if (idx <= pointData.length - 2) {
             const fromPoint = pointData[idx];
             const toPoint = pointData[idx + 1];
-            this.addHistoryLine(fromPoint, toPoint);
+            this.addHistoryLine(fromPoint, toPoint, lineColor);
             this.addPoint(fromPoint);
             this.addPoint(toPoint);
           }
@@ -52,13 +62,13 @@ export default Vue.extend({
     },
   },
   methods: {
-    addHistoryLine: function (from, to) {
+    addHistoryLine: function (from, to, color) {
       if (!this.map) return;
       let pointFrom = new BMap.Point(from.long, from.lat);
       let pointTo = new BMap.Point(to.long, to.lat);
       let line = new BMap.Polyline([pointFrom, pointTo], {
         strokeWeight: 3,
-        strokeColor: "red",
+        strokeColor: color,
       });
       this.map.addOverlay(line);
     },
