@@ -48,7 +48,10 @@ export default Vue.extend({
         return;
       }
 
-      const wordList = newData["tags"].map((name) => ({ name, value: 100 }));
+      const wordList = Object.entries(newData["tags"]).map(([name, value]) => ({
+        name,
+        value,
+      }));
 
       const optionData = {
         animation: false,
@@ -127,16 +130,17 @@ export default Vue.extend({
 .tag-view {
   width: 100%;
   display: flex;
+  height: 400px;
+
   .tag-view-tags {
     width: 50%;
-    height: 400px;
     padding: 32px;
   }
   .tag-view-types {
     width: 50%;
-    height: 100%;
     text-align: left;
     padding: 32px;
+    overflow-y: auto;
 
     .tag-view-type {
       margin-bottom: 16px;

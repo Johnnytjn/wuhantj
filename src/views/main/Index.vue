@@ -313,8 +313,6 @@ export default Vue.extend({
 
   .detail {
     flex-grow: 2;
-    padding-left: 24px;
-    padding-right: 24px;
 
     .fraud-info {
       display: flex;
