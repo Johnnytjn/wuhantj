@@ -37,6 +37,7 @@ export default Vue.extend({
         nodeData.push({
           name: formattedName,
           category: 1,
+          draggable: true,
         });
       });
 
@@ -58,8 +59,8 @@ export default Vue.extend({
           {
             name: "feature graph",
             type: "graph",
-            layout: "circular",
-            // layout: "force",
+            // layout: "circular",
+            layout: "force",
             categories,
             data: nodeData,
             links: linkData,
@@ -69,8 +70,8 @@ export default Vue.extend({
             force: {
               // repulsion: 200,
               // edgeLength: 300
-              repulsion: 60,
-              edgeLength: 500,
+              repulsion: 200,
+              edgeLength: 120,
             },
             label: {
               show: true,

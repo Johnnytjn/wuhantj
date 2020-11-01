@@ -293,7 +293,7 @@ export default Vue.extend({
 
   .general {
     display: flex;
-    height: 250px;
+    height: 300px;
     /* border-bottom: 1px solid rgb(238, 241, 246); */
 
     .person-info {
