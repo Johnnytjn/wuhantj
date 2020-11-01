@@ -130,7 +130,7 @@ export default Vue.extend({
 .tag-view {
   width: 100%;
   display: flex;
-  height: 400px;
+  height: 450px;
 
   .tag-view-tags {
     width: 50%;
