@@ -1,7 +1,7 @@
 <template>
   <div id="graph-person">
     <el-tabs type="card">
-      <el-tab-pane :label="type === 'fraud' ? '基本信息' : '个人信息'">
+      <el-tab-pane label="个人信息" v-if="type !== 'fraud'">
         <component :is="tabPersonal" :personData="personalData" />
       </el-tab-pane>
       <el-tab-pane label="通联信息">

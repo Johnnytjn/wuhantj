@@ -33,7 +33,7 @@
         <div style="width: 33%">
           <data-field label="性别" :value="getValue('sex') | decode('sex')" />
           <data-field label="出生日期" :value="getValue('birthday')" />
-          <data-field label="宗教信仰" :value="getValue('religion')" />
+          <data-field label="常驻地" :value="getValue('location')" />
         </div>
         <div style="width: 33%">
           <data-field label="职业" :value="getValue('career')" />
@@ -45,12 +45,7 @@
         </div>
       </div>
       <div style="display: flex">
-        <div style="width: 66%">
-          <data-field label="地址" :value="getValue('homeAddress')" />
-        </div>
-        <div style="width: 33%">
-          <data-field label="常驻地" :value="getValue('location')" />
-        </div>
+        <data-field label="地址" :value="getValue('homeAddress')" />
       </div>
     </div>
   </div>
