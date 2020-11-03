@@ -11043,6 +11043,11 @@ widest-line@^2.0.0:
   dependencies:
     string-width "^2.1.1"
 
+wordcloud@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npm.taobao.org/wordcloud/download/wordcloud-1.1.1.tgz#a68d75a05339c2da8ec8aea21a00f90e6f2e8eba"
+  integrity sha1-po11oFM5wtqOyK6iGgD5Dm8ujro=
+
 wordwrap@~0.0.2:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"

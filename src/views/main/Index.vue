@@ -27,7 +27,7 @@
           tab-position="left"
           v-show="type !== 'fraud' && !!graphData && !!graphHumanData"
           @tab-click="onClickTab"
-          value="group"
+          value="tag"
           :key="type"
         >
           <el-tab-pane label="群体发现" name="group">
@@ -71,7 +71,7 @@ import TrackMap from "./v2/TrackMap.vue";
 import FraudGraph from "./v2/FraudGraph.vue";
 import Graph from "./v2/Graph.vue";
 import PersonInfo from "./v2/PersonInfo.vue";
-import TagView from "./v2/TagView.vue";
+import TagView from "./v2/TagView2.vue";
 
 export default Vue.extend({
   components: {
