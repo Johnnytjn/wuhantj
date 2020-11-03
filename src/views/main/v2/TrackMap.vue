@@ -75,8 +75,9 @@ export default Vue.extend({
     addPoint: function (p) {
       if (!this.map) return;
       const pointColor = p.type === 0 ? "red" : "blue";
+      const circleSize = p.type === 0 ? 200 : 800;
       let point = new BMap.Point(p.long, p.lat);
-      let circle = new BMap.Circle(point, 200, {
+      let circle = new BMap.Circle(point, circleSize, {
         strokeColor: pointColor,
         fillColor: pointColor,
       });

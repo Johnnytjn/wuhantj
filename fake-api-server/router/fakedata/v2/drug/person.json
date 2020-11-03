@@ -21,8 +21,9 @@
     "sex": 0,
     "age": 44,
     "birthday": "1995-07-08",
-    "marriage": 22,
-    "culture": 83,
+    "marriage": "(婚姻原始数据)",
+    "culture": "(文化原始数据)",
+    "mz": "(民族原始数据)",
     "homeAddress": "上海市嘉定区曹安公路4800号同济大学"
   },
   "linkInfo": {

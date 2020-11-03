@@ -25,10 +25,7 @@
         <div style="width: 33%">
           <data-field label="姓名" :value="getValue('name')" />
           <data-field label="年龄" :value="getValue('age')" />
-          <data-field
-            label="婚姻状况"
-            :value="getValue('marriage') | decode('marriage')"
-          />
+          <data-field label="婚姻状况" :value="getValue('marriage')" />
         </div>
         <div style="width: 33%">
           <data-field label="性别" :value="getValue('sex') | decode('sex')" />
@@ -38,14 +35,16 @@
         <div style="width: 33%">
           <data-field label="职业" :value="getValue('career')" />
           <data-field label="政治面貌" :value="getValue('political')" />
-          <data-field
-            label="文化程度"
-            :value="getValue('culture') | decode('culture')"
-          />
+          <data-field label="文化程度" :value="getValue('culture')" />
         </div>
       </div>
       <div style="display: flex">
-        <data-field label="地址" :value="getValue('homeAddress')" />
+        <div style="width: 66%">
+          <data-field label="地址" :value="getValue('homeAddress')" />
+        </div>
+        <div style="width: 33%">
+          <data-field label="民族" :value="getValue('mz')" />
+        </div>
       </div>
     </div>
   </div>

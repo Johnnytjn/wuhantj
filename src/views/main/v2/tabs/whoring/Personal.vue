@@ -25,21 +25,16 @@
         <div style="width: 50%">
           <data-field label="姓名" :value="getValue('name')" />
           <data-field label="年龄" :value="getValue('age')" />
-          <data-field
-            label="婚姻状况"
-            :value="getValue('marriage') | decode('marriage')"
-          />
+          <data-field label="婚姻状况" :value="getValue('marriage')" />
         </div>
         <div style="width: 50%">
           <data-field label="性别" :value="getValue('sex') | decode('sex')" />
           <data-field label="出生日期" :value="getValue('birthday')" />
-          <data-field
-            label="文化程度"
-            :value="getValue('culture') | decode('culture')"
-          />
+          <data-field label="文化程度" :value="getValue('culture')" />
         </div>
       </div>
       <div>
+        <data-field label="民族" :value="getValue('mz')" />
         <data-field label="地址" :value="getValue('homeAddress')" />
       </div>
     </div>
